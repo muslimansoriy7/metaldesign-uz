@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MetalDesign.uz — Millimetr aniqligidagi metall konstruksiyalar</title>
+<meta name="description" content="Zakladnoy, shayba, darvoza, perila va lazer kesish xizmati. To'g'ridan-to'g'ri zavoddan. Toshkent, O'zbekiston.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+:root{
+  --iron:#141414;--iron-mid:#1e1e1e;--iron-light:#282828;
+  --rust:#c0392b;--rust-bright:#e74c3c;
+  --chrome:#9aa5ad;--chrome-l:#d4dce2;
+  --white:#f2ede6;
+  --fd:'Oswald',sans-serif;--fb:'DM Sans',sans-serif;
+  --side:clamp(18px,5vw,80px);
+  --gap:clamp(50px,7vw,110px);
+}
+body{font-family:var(--fb);background:var(--iron);color:var(--white);overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");opacity:.5}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{max-width:100%;display:block}
+
+/* ── TYPOGRAPHY ── */
+.lbl{font-family:var(--fd);font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--rust);display:flex;align-items:center;gap:12px}
+.lbl::before{content:'';width:28px;height:1px;background:var(--rust)}
+.h2{font-family:var(--fd);font-size:clamp(36px,5.5vw,68px);font-weight:700;text-transform:uppercase;line-height:.94;letter-spacing:-.5px;margin-top:14px}
+.h2 em{font-style:normal;color:var(--rust)}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:15px 30px;transition:all .25s;cursor:pointer;white-space:nowrap}
+.btn-rust{background:var(--rust);color:var(--white);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-rust:hover{background:var(--rust-bright);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--chrome-l);border:1px solid rgba(154,165,173,.3)}
+.btn-outline:hover{border-color:var(--rust);color:var(--rust-bright)}
+.btn-white{background:var(--white);color:var(--rust);font-weight:700}
+.btn-white:hover{background:var(--iron);color:var(--white);border:1px solid rgba(255,255,255,.1)}
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 var(--side);height:62px;background:rgba(12,12,12,.97);border-bottom:1px solid rgba(192,57,43,.3);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nav-logo{font-family:var(--fd);font-size:20px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.nav-logo em{font-style:normal;color:var(--rust)}
+.nav-links{display:flex;align-items:center;gap:clamp(14px,2vw,38px);list-style:none}
+.nav-links a{font-family:var(--fd);font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--chrome);transition:color .2s}
+.nav-links a:hover{color:var(--rust-bright)}
+.nav-cta{background:var(--rust)!important;color:var(--white)!important;padding:8px 18px;font-size:11px!important;font-family:var(--fd);font-weight:600;letter-spacing:2px;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));transition:background .2s!important}
+.nav-cta:hover{background:var(--rust-bright)!important}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:var(--white);transition:all .3s}
+/* phone in nav */
+.nav-phone{font-family:var(--fd);font-size:12px;font-weight:600;letter-spacing:1px;color:var(--chrome-l);display:flex;align-items:center;gap:6px}
+.nav-phone span{color:var(--rust)}
+
+/* ══════════════════════════════
+   MOBILE MENU
+══════════════════════════════ */
+.mob-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(8,8,8,.99);flex-direction:column;align-items:center;justify-content:center;gap:28px;backdrop-filter:blur(16px)}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:var(--fd);font-size:clamp(26px,7vw,40px);font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--white);transition:color .2s}
+.mob-menu a:hover{color:var(--rust)}
+.mob-close{position:absolute;top:20px;right:var(--side);font-size:26px;color:var(--chrome);cursor:pointer;background:none;border:none;line-height:1}
+.mob-phone{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--rust);letter-spacing:1px}
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:100px var(--side) 70px;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(192,57,43,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(192,57,43,.05) 1px,transparent 1px);background-size:64px 64px}
+.hero-panel{position:absolute;right:-2%;top:0;bottom:0;width:46%;background:linear-gradient(135deg,var(--iron-mid) 0%,#1a1a1a 100%);clip-path:polygon(14% 0,100% 0,100% 100%,0% 100%)}
+.hero-panel::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--rust),transparent);opacity:.6}
+.hero-content{position:relative;z-index:2;max-width:660px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.4);padding:7px 16px;font-family:var(--fd);font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--rust-bright);margin-bottom:28px}
+.hero-badge::before{content:'';width:7px;height:7px;background:var(--rust-bright);border-radius:50%;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
+.hero h1{font-family:var(--fd);font-size:clamp(40px,6.5vw,86px);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-1px;margin-bottom:6px}
+.hero h1 .stroke{-webkit-text-stroke:1.5px var(--chrome-l);color:transparent}
+.hero h1 em{font-style:normal;color:var(--rust);display:block}
+.hero-sub{font-size:clamp(14px,1.4vw,17px);font-weight:300;line-height:1.78;color:var(--chrome);max-width:520px;padding-left:18px;border-left:3px solid var(--rust);margin-bottom:40px;margin-top:22px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:54px}
+.hero-stats{display:flex;gap:clamp(20px,4vw,52px);flex-wrap:wrap}
+.stat-num{font-family:var(--fd);font-size:clamp(32px,3.5vw,48px);font-weight:700;line-height:1;color:var(--white)}
+.stat-num span{color:var(--rust)}
+.stat-lbl{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--chrome);margin-top:5px}
+.hero-visual{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:clamp(260px,26vw,390px);opacity:.88;z-index:1}
+
+/* ══════════════════════════════
+   TICKER
+══════════════════════════════ */
+.ticker{background:var(--rust);overflow:hidden;white-space:nowrap;padding:12px 0;position:relative;z-index:10}
+.ticker-inner{display:inline-flex;animation:tick 30s linear infinite}
+.ticker-inner span{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.9);padding:0 36px}
+.ticker-inner span::before{content:'⬥';margin-right:12px;opacity:.6}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ══════════════════════════════
+   SECTIONS BASE
+══════════════════════════════ */
+section{position:relative;z-index:1;padding:var(--gap) var(--side)}
+.sec-head{margin-bottom:clamp(32px,4vw,60px)}
+
+/* ══════════════════════════════
+   PROBLEMS
+══════════════════════════════ */
+.problems{background:var(--iron-mid);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);margin-top:clamp(28px,4vw,56px)}
+.prob-card{background:var(--iron);border:1px solid rgba(255,255,255,.05);border-top:3px solid var(--rust);padding:32px 24px;transition:transform .25s,border-top-color .25s}
+.prob-card:hover{transform:translateY(-4px);border-top-color:var(--rust-bright)}
+.prob-icon{font-size:32px;margin-bottom:18px}
+.prob-card h3{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--white);margin-bottom:12px;letter-spacing:.3px}
+.prob-card p{font-size:14px;font-weight:300;line-height:1.72;color:var(--chrome)}
+
+/* ══════════════════════════════
+   PRODUCTS
+══════════════════════════════ */
+.products{background:var(--iron)}
+.prod-top{display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px;margin-bottom:36px}
+.prod-intro{font-size:clamp(14px,1.3vw,17px);font-weight:300;line-height:1.75;color:var(--chrome);max-width:520px;margin-top:14px}
+/* Tabs */
+.tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:44px;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab-btn{font-family:var(--fd);font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:13px 24px;color:var(--chrome);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;cursor:pointer;background:transparent;border-left:none;border-right:none;border-top:none;white-space:nowrap;flex-shrink:0}
+.tab-btn.active{color:var(--rust-bright);border-bottom-color:var(--rust)}
+.tab-btn:hover:not(.active){color:var(--chrome-l)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.tab-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:start}
+.prod-desc{font-size:clamp(13px,1.2vw,15px);font-weight:300;line-height:1.82;color:var(--chrome);margin-bottom:20px}
+.prod-desc strong{color:var(--chrome-l);font-weight:600}
+.prod-sub{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin:24px 0 12px}
+.spec-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.spec-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:300;color:var(--chrome);line-height:1.5}
+.spec-list li::before{content:'→';color:var(--rust);flex-shrink:0;font-size:12px;margin-top:1px}
+.spec-list li strong{color:var(--chrome-l);font-weight:500}
+/* Tables */
+.tw{overflow-x:auto;margin-bottom:24px;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:400px}
+thead tr{border-bottom:2px solid var(--rust)}
+thead th{font-family:var(--fd);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--chrome);padding:11px 14px;text-align:left;white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s}
+tbody tr:hover{background:rgba(255,255,255,.03)}
+tbody td{padding:11px 14px;color:var(--chrome);font-weight:300;line-height:1.4}
+tbody td strong{color:var(--chrome-l);font-weight:500}
+.badge-tag{display:inline-block;background:rgba(192,57,43,.18);color:var(--rust-bright);font-family:var(--fd);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:2px 7px;margin-left:6px}
+/* B2B/B2C tabs */
+/* ── Segmented category selector ── */
+.cat-tabs{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;margin-bottom:40px;
+  background:var(--iron-mid);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:2px;overflow:hidden;
+}
+.cat-btn{
+  font-family:var(--fd);font-size:11px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:0;height:56px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  border:none;border-right:1px solid rgba(255,255,255,.06);
+  color:var(--chrome);cursor:pointer;transition:all .25s;
+  background:transparent;position:relative;
+}
+.cat-btn:last-child{border-right:none}
+.cat-btn .cb-icon{font-size:18px;line-height:1;transition:transform .25s}
+.cat-btn .cb-text{font-size:10px;letter-spacing:1.5px}
+/* Active indicator bar */
+.cat-btn::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--rust);transform:scaleX(0);transform-origin:center;
+  transition:transform .3s ease;
+}
+.cat-btn.active{
+  background:rgba(192,57,43,.12);
+  color:var(--white);
+}
+.cat-btn.active::after{transform:scaleX(1)}
+.cat-btn.active .cb-icon{transform:scale(1.2)}
+.cat-btn:hover:not(.active){background:rgba(255,255,255,.03);color:var(--chrome-l)}
+/* Mobile: stack label under icon, bigger touch target */
+@media(max-width:600px){
+  .cat-tabs{grid-template-columns:repeat(3,1fr)}
+  .cat-btn{height:64px;gap:4px}
+  .cat-btn .cb-icon{font-size:22px}
+  .cat-btn .cb-text{font-size:9px;letter-spacing:1px;text-align:center;line-height:1.3}
+}
+.cat-panel{display:none}.cat-panel.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.prod-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:24px}
+.prod-card{background:var(--iron-mid);border:1px solid rgba(255,255,255,.06);border-top:3px solid rgba(192,57,43,.5);padding:28px 22px;transition:border-top-color .2s,transform .2s}
+.prod-card:hover{border-top-color:var(--rust);transform:translateY(-3px)}
+.prod-card-icon{font-size:30px;margin-bottom:14px}
+.prod-card h3{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--white);margin-bottom:10px}
+.prod-card p{font-size:13px;font-weight:300;line-height:1.68;color:var(--chrome)}
+/* Laser */
+.laser-specs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.laser-card{background:var(--iron-mid);border:1px solid rgba(255,255,255,.06);padding:22px 18px;border-top:2px solid var(--rust)}
+.laser-val{font-family:var(--fd);font-size:clamp(26px,3vw,36px);font-weight:700;color:var(--white);line-height:1}
+.laser-val span{font-size:.5em;color:var(--chrome)}
+.laser-key{font-size:11px;font-weight:300;color:var(--chrome);margin-top:5px}
+/* Washer */
+.washer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px;margin-bottom:32px}
+.washer-card{background:var(--iron-mid);border:1px solid rgba(255,255,255,.06);border-top:2px solid rgba(192,57,43,.35);padding:22px 18px;transition:border-top-color .2s,transform .2s}
+.washer-card:hover{border-top-color:var(--rust);transform:translateY(-3px)}
+.washer-icon{width:48px;height:48px;margin-bottom:14px}
+.washer-card h4{font-family:var(--fd);font-size:14px;font-weight:600;color:var(--chrome-l);margin-bottom:8px}
+.washer-card p,.washer-card td{font-size:12px;font-weight:300;color:var(--chrome);line-height:1.6}
+.washer-cta{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.35)}
+.washer-cta h4{color:var(--rust-bright)}
+
+/* ══════════════════════════════
+   ADVANTAGES
+══════════════════════════════ */
+.advantages{background:var(--iron-mid)}
+.adv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:20px;margin-top:clamp(28px,4vw,56px)}
+.adv-card{position:relative;background:var(--iron);border:1px solid rgba(255,255,255,.05);padding:32px 26px;overflow:hidden;transition:border-color .25s,transform .25s}
+.adv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--rust);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.adv-card:hover::before{transform:scaleX(1)}
+.adv-card:hover{border-color:rgba(192,57,43,.25);transform:translateY(-4px)}
+.adv-num{font-family:var(--fd);font-size:52px;font-weight:700;color:rgba(255,255,255,.04);line-height:1;margin-bottom:12px}
+.adv-icon{font-size:26px;display:block;margin-bottom:14px}
+.adv-card h3{font-family:var(--fd);font-size:17px;font-weight:600;color:var(--white);margin-bottom:10px}
+.adv-card p{font-size:13px;font-weight:300;line-height:1.72;color:var(--chrome)}
+
+/* ══════════════════════════════
+   PROCESS
+══════════════════════════════ */
+.process{background:var(--iron)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid rgba(255,255,255,.05);margin-top:clamp(28px,4vw,56px)}
+.step{padding:32px 24px;border-right:1px solid rgba(255,255,255,.05);transition:background .2s}
+.step:last-child{border-right:none}
+.step:hover{background:rgba(192,57,43,.04)}
+.step-num{font-family:var(--fd);font-size:44px;font-weight:700;color:rgba(192,57,43,.18);line-height:1;margin-bottom:16px}
+.step-icon{font-size:26px;margin-bottom:14px}
+.step h3{font-family:var(--fd);font-size:16px;font-weight:600;color:var(--white);margin-bottom:8px}
+.step p{font-size:13px;font-weight:300;line-height:1.68;color:var(--chrome)}
+
+/* ══════════════════════════════
+   STATS
+══════════════════════════════ */
+.stats-bar{background:var(--iron-light);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);padding:56px var(--side)}
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.stats-row .si{text-align:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06)}
+.stats-row .si:last-child{border-right:none}
+.si .stat-num{font-size:clamp(32px,4vw,52px)}
+
+/* ══════════════════════════════
+   REVIEWS / SOCIAL PROOF
+══════════════════════════════ */
+.reviews{background:var(--iron-mid)}
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:clamp(28px,4vw,56px)}
+.review-card{background:var(--iron);border:1px solid rgba(255,255,255,.06);border-left:3px solid var(--rust);padding:32px 28px;transition:border-left-color .2s}
+.review-card:hover{border-left-color:var(--rust-bright)}
+.review-stars{color:var(--rust);font-size:16px;letter-spacing:2px;margin-bottom:16px}
+.review-text{font-size:15px;font-weight:300;line-height:1.8;color:var(--chrome-l);font-style:italic;margin-bottom:20px}
+.review-text::before{content:'"';font-size:40px;font-family:var(--fd);color:rgba(192,57,43,.25);line-height:0;vertical-align:-16px;margin-right:4px}
+.reviewer{display:flex;align-items:center;gap:14px}
+.reviewer-avatar{width:44px;height:44px;background:rgba(192,57,43,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:16px;font-weight:700;color:var(--rust);flex-shrink:0}
+.reviewer-name{font-family:var(--fd);font-size:14px;font-weight:600;color:var(--white)}
+.reviewer-role{font-size:12px;font-weight:300;color:var(--chrome);margin-top:2px}
+
+/* ══════════════════════════════
+   FAQ
+══════════════════════════════ */
+.faq{background:var(--iron)}
+.faq-list{display:flex;flex-direction:column;gap:0;margin-top:clamp(28px,4vw,56px);border:1px solid rgba(255,255,255,.06)}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.06)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 28px;cursor:pointer;transition:background .2s;user-select:none}
+.faq-q:hover{background:rgba(192,57,43,.05)}
+.faq-q span{font-family:var(--fd);font-size:16px;font-weight:600;color:var(--white);letter-spacing:.3px}
+.faq-icon{width:28px;height:28px;flex-shrink:0;background:rgba(192,57,43,.12);display:flex;align-items:center;justify-content:center;color:var(--rust);font-size:18px;font-weight:300;transition:transform .3s,background .2s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--rust);color:var(--white)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:22px}
+.faq-a p{padding:0 28px;font-size:14px;font-weight:300;line-height:1.8;color:var(--chrome)}
+
+/* ══════════════════════════════
+   TRUST
+══════════════════════════════ */
+.trust{background:var(--iron-mid)}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:start;margin-top:clamp(28px,4vw,56px)}
+.trust p{font-size:clamp(14px,1.3vw,16px);font-weight:300;line-height:1.82;color:var(--chrome);margin-bottom:18px}
+.guar-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.guar-list li{display:flex;align-items:center;gap:13px;font-size:14px;font-weight:400;color:var(--chrome-l)}
+.check{width:24px;height:24px;flex-shrink:0;background:rgba(192,57,43,.15);color:var(--rust-bright);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.clients-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.client-card{background:var(--iron);border:1px solid rgba(255,255,255,.06);padding:22px;transition:border-color .2s}
+.client-card:hover{border-color:rgba(192,57,43,.3)}
+.cli-lbl{font-family:var(--fd);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
+.client-card h4{font-family:var(--fd);font-size:18px;font-weight:700;color:var(--white);margin-bottom:7px}
+.client-card p{font-size:12px;font-weight:300;color:var(--chrome);line-height:1.6}
+.cli-cta{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.3)}
+.cli-cta .cli-lbl{color:var(--rust)}
+.cli-cta h4{color:var(--rust-bright)}
+
+/* ══════════════════════════════
+   CTA SECTION
+══════════════════════════════ */
+.cta-section{background:var(--rust);padding:clamp(56px,8vw,110px) var(--side);position:relative;overflow:hidden}
+.cta-section::before{content:'METALDESIGN';position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:var(--fd);font-size:clamp(70px,13vw,190px);font-weight:700;text-transform:uppercase;color:rgba(0,0,0,.11);white-space:nowrap;pointer-events:none;letter-spacing:-4px}
+.cta-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:clamp(36px,5vw,72px);align-items:center}
+.cta-title{font-family:var(--fd);font-size:clamp(38px,5.5vw,76px);font-weight:700;text-transform:uppercase;line-height:.92;color:var(--white);letter-spacing:-1px}
+.cta-sub{font-size:clamp(14px,1.3vw,16px);font-weight:300;color:rgba(255,255,255,.8);margin-top:18px;line-height:1.72;max-width:480px}
+.cta-form{display:flex;flex-direction:column;gap:11px;min-width:clamp(270px,24vw,350px)}
+.cta-input{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.28);color:var(--white);padding:14px 16px;font-family:var(--fb);font-size:14px;outline:none;width:100%;transition:border-color .2s}
+.cta-input::placeholder{color:rgba(255,255,255,.42)}
+.cta-input:focus{border-color:rgba(255,255,255,.7)}
+.cta-input option{background:var(--iron);color:var(--white)}
+.cta-note{font-size:11px;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.5px;line-height:1.6}
+.cta-note a{color:rgba(255,255,255,.7);text-decoration:underline}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer{background:#0b0b0b;padding:clamp(44px,6vw,76px) var(--side) 24px;border-top:1px solid rgba(192,57,43,.22)}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(24px,3.5vw,52px);margin-bottom:44px}
+.f-logo{font-family:var(--fd);font-size:24px;font-weight:700;display:block;margin-bottom:14px}
+.f-logo em{font-style:normal;color:var(--rust)}
+.f-desc{font-size:13px;font-weight:300;color:var(--chrome);line-height:1.75;max-width:250px}
+.f-col h5{font-family:var(--fd);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin-bottom:18px}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.f-col ul a{font-size:13px;font-weight:300;color:var(--chrome);transition:color .2s}
+.f-col ul a:hover{color:var(--white)}
+.f-contact{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:300;color:var(--chrome);margin-bottom:11px;line-height:1.5}
+.f-contact strong{color:var(--white);font-weight:500;display:block}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#444;font-weight:300}
+.footer-bottom a{color:#444;transition:color .2s}
+.footer-bottom a:hover{color:var(--chrome)}
+
+/* ══════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media(max-width:1024px){
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .step:nth-child(3){border-right:none}
+  .step{border-bottom:1px solid rgba(255,255,255,.05)}
+}
+@media(max-width:900px){
+  .nav-links,.nav-phone{display:none}
+  .burger{display:flex}
+  .hero-panel,.hero-visual{display:none}
+  .prob-grid{grid-template-columns:1fr}
+  .tab-layout{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:1fr}
+  .cta-inner{grid-template-columns:1fr}
+  .cta-form{min-width:100%}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:repeat(3,1fr)}
+  .stats-row .si:nth-child(3){border-right:none}
+  .reviews-grid{grid-template-columns:1fr}
+  .prod-top{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .hero h1{font-size:clamp(38px,10vw,62px)}
+  .hero-actions{flex-direction:column}
+  .btn{width:100%;justify-content:center}
+  .adv-grid{grid-template-columns:1fr}
+  .washer-grid{grid-template-columns:1fr 1fr}
+  .laser-specs{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .stats-row .si{border-right:none;border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0}
+  .stats-row .si:last-child{border-bottom:none}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:none!important}
+  .tabs{gap:0}
+  .tab-btn{padding:10px 14px;font-size:10px}
+  .clients-grid{grid-template-columns:1fr}
+  .cta-title{font-size:clamp(34px,8vw,54px)}
+  .prob-grid{grid-template-columns:1fr}
+  .faq-q{padding:18px 18px}
+  .faq-a p{padding:0 18px}
+  .reviews-grid{grid-template-columns:1fr}
+}
+@media(max-width:380px){
+  .hero h1{font-size:36px}
+  .washer-grid{grid-template-columns:1fr}
+  .laser-specs{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ MOBILE MENU ══════ -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#muammo" onclick="closeMob()">Muammo</a>
+  <a href="#mahsulotlar" onclick="closeMob()">Mahsulotlar</a>
+  <a href="#afzalliklar" onclick="closeMob()">Afzalliklar</a>
+  <a href="#jarayon" onclick="closeMob()">Jarayon</a>
+  <a href="#ishonch" onclick="closeMob()">Ishonch</a>
+  <a href="#aloqa" onclick="closeMob()" class="btn btn-rust">Bepul konsultatsiya olish</a>
+  <a href="tel:+998991501111" class="mob-phone">📞 +998 99 150-11-11</a>
+</div>
+
+<!-- ══════ NAV ══════ -->
+<nav id="mainNav">
+  <div class="nav-logo">Metal<em>Design</em>.uz</div>
+  <ul class="nav-links">
+    <li><a href="#muammo">Muammo</a></li>
+    <li><a href="#mahsulotlar">Mahsulotlar</a></li>
+    <li><a href="#afzalliklar">Afzalliklar</a></li>
+    <li><a href="#jarayon">Jarayon</a></li>
+    <li><a href="#ishonch">Ishonch</a></li>
+    <li><a href="#aloqa" class="nav-cta">Bepul konsultatsiya olish</a></li>
+  </ul>
+  <div class="nav-phone"><span>📞</span> +998 99 150-11-11</div>
+  <div class="burger" onclick="openMob()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-panel"></div>
+
+  <div class="hero-visual">
+    <svg viewBox="0 0 380 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#5a5f68"/><stop offset="50%" style="stop-color:#3a3d42"/><stop offset="100%" style="stop-color:#252729"/>
+        </linearGradient>
+        <linearGradient id="rg" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#4a4f55"/><stop offset="100%" style="stop-color:#2a2d30"/>
+        </linearGradient>
+        <filter id="ps"><feDropShadow dx="6" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".6"/></filter>
+      </defs>
+      <text x="190" y="38" fill="#c0392b" font-size="12" font-family="Oswald,sans-serif" font-weight="600" text-anchor="middle" letter-spacing="2">200×200mm</text>
+      <line x1="70" y1="52" x2="310" y2="52" stroke="#c0392b" stroke-width="1" stroke-dasharray="5,3"/>
+      <line x1="70" y1="46" x2="70" y2="58" stroke="#c0392b" stroke-width="1.5"/>
+      <line x1="310" y1="46" x2="310" y2="58" stroke="#c0392b" stroke-width="1.5"/>
+      <rect x="70" y="64" width="240" height="230" fill="url(#sg)" rx="2" filter="url(#ps)"/>
+      <rect x="70" y="64" width="240" height="5" fill="#6a7080" rx="1"/>
+      <rect x="70" y="64" width="5" height="230" fill="#5a6070"/>
+      <line x1="70" y1="141" x2="310" y2="141" stroke="#444" stroke-width=".6" opacity=".5"/>
+      <line x1="70" y1="218" x2="310" y2="218" stroke="#444" stroke-width=".6" opacity=".5"/>
+      <line x1="150" y1="64" x2="150" y2="294" stroke="#444" stroke-width=".6" opacity=".5"/>
+      <line x1="230" y1="64" x2="230" y2="294" stroke="#444" stroke-width=".6" opacity=".5"/>
+      <circle cx="92" cy="86" r="10" fill="#c0392b" opacity=".9"/>
+      <circle cx="288" cy="86" r="10" fill="#c0392b" opacity=".9"/>
+      <circle cx="92" cy="272" r="10" fill="#c0392b" opacity=".9"/>
+      <circle cx="288" cy="272" r="10" fill="#c0392b" opacity=".9"/>
+      <rect x="70" y="64" width="48" height="4" fill="#c0392b"/><rect x="70" y="64" width="4" height="48" fill="#c0392b"/>
+      <rect x="262" y="64" width="48" height="4" fill="#c0392b"/><rect x="306" y="64" width="4" height="48" fill="#c0392b"/>
+      <rect x="70" y="284" width="48" height="4" fill="#c0392b"/><rect x="70" y="250" width="4" height="44" fill="#c0392b"/>
+      <rect x="262" y="284" width="48" height="4" fill="#c0392b"/><rect x="306" y="250" width="4" height="44" fill="#c0392b"/>
+      <rect x="128" y="294" width="12" height="100" fill="url(#rg)" rx="2"/>
+      <rect x="184" y="294" width="12" height="100" fill="url(#rg)" rx="2"/>
+      <rect x="240" y="294" width="12" height="100" fill="url(#rg)" rx="2"/>
+      <rect x="128" y="386" width="12" height="8" fill="#c0392b" rx="1"/>
+      <rect x="184" y="386" width="12" height="8" fill="#c0392b" rx="1"/>
+      <rect x="240" y="386" width="12" height="8" fill="#c0392b" rx="1"/>
+      <text x="340" y="184" fill="#888" font-size="11" font-family="Oswald,sans-serif" font-weight="500" text-anchor="middle" letter-spacing="1">8mm</text>
+      <line x1="314" y1="64" x2="314" y2="294" stroke="#555" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="190" y="196" fill="rgba(255,255,255,0.03)" font-size="36" font-family="Oswald,sans-serif" font-weight="700" text-anchor="middle" letter-spacing="2">ZAKLADNOY</text>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Toshkent · O'zbekiston · B2B &amp; B2C Ishlab chiqarish</div>
+
+    <h1 class="display">
+      <span class="stroke">Poydevordan</span>
+      <em>Darvozagacha</em>
+      Millimetr Aniqlik
+    </h1>
+
+    <p class="hero-sub">
+      O'zbekistondagi yirik qurilish kompaniyalari va shinam xonadonlar uchun og'ir sanoat standartidagi zakladnoy, shayba, darvoza, perila va lazer xizmati — to'g'ridan-to'g'ri zavodning o'zidan!
+    </p>
+
+    <div class="hero-actions">
+      <a href="#aloqa" class="btn btn-rust">Bepul konsultatsiya olish →</a>
+
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">500<span>+</span></div>
+        <div class="stat-lbl">Mamnun mijozlar</div>
+      </div>
+      <div>
+        <div class="stat-num">0.1<span>mm</span></div>
+        <div class="stat-lbl">Lazer aniqligi</div>
+      </div>
+      <div>
+        <div class="stat-num">48<span>soat</span></div>
+        <div class="stat-lbl">Standart muddat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ TICKER ══════ -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Zakladnoy listlar</span><span>Sanoat shaybalari</span><span>Lazer kesish</span>
+    <span>Premium darvozalar</span><span>Lazerli panjaralar</span><span>Silliq chokli perilalar</span>
+    <span>Galvanizatsiya</span><span>GOST standartlari</span><span>Ulgurji buyurtma</span>
+    <span>Zakladnoy listlar</span><span>Sanoat shaybalari</span><span>Lazer kesish</span>
+    <span>Premium darvozalar</span><span>Lazerli panjaralar</span><span>Silliq chokli perilalar</span>
+    <span>Galvanizatsiya</span><span>GOST standartlari</span><span>Ulgurji buyurtma</span>
+  </div>
+</div>
+
+<!-- ══════ PROBLEMS ══════ -->
+<section class="problems" id="muammo">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl">Nega ko'p loyihalar muvaffaqiyatsizlikka uchraydi</div>
+      <h2 class="h2">Metall borasidagi xatolar<br><em>qanchaga tushishini</em><br>bilasizmi?</h2>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card">
+        <div class="prob-icon">⚠️</div>
+        <h3>Sifatsiz svarka va yupqa listlar</h3>
+        <p>Sifatsiz ustalar tomonidan qilingan zakladnoy yoki darvozalar yuklamani ko'tarmay egiladi, vaqt o'tib sinadi yoki poydevordan sug'urilib chiqadi. Bu — ko'rinmas, lekin halokatli nuqson.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">🦠</div>
+        <h3>Doimiy zanglash muammosi</h3>
+        <p>Oddiy bo'yoq bilan bo'yalgan ko'cha eshiklari, panjara va perilalar birinchi qishdayoq zanglab, uy fassadini rasvo qiladi. Har yili qayta bo'yash esa qo'shimcha xarajat.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">📏</div>
+        <h3>Qiyshiq o'lcham va vaqt yo'qotish</h3>
+        <p>Eski uslubda, bolgarkada qo'lda kesilgan detallar montaj paytida bir-biriga tushmaydi. Qurilish vaqti cho'ziladi, pulingiz havoga uchadi. 0.1mm aniqlik — bu bizning standartimiz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PRODUCTS ══════ -->
+<section class="products" id="mahsulotlar">
+  <div class="reveal">
+    <div class="prod-top">
+      <div>
+        <div class="lbl">Mahsulotlar katalogi</div>
+        <h2 class="h2">Har qanday murakkablikdagi<br>metall muammolarga<br><em>yagona yechim</em></h2>
+        <p class="prod-intro">Chizmangizni yuboring — qolgan hamma narsani biz hal qilamiz. B2B va B2C uchun alohida yechimlar.</p>
+      </div>
+      <a href="#aloqa" class="btn btn-rust" style="align-self:flex-end">Bepul konsultatsiya olish →</a>
+    </div>
+
+    <!-- B2B / B2C category tabs -->
+    <div class="cat-tabs">
+      <button class="cat-btn active" onclick="showCat('b2b',this)">
+        <span class="cb-icon">🏗</span>
+        <span class="cb-text">Sanoat &amp; Qurilish<br>(B2B)</span>
+      </button>
+      <button class="cat-btn" onclick="showCat('b2c',this)">
+        <span class="cb-icon">🚪</span>
+        <span class="cb-text">Arxitektura &amp; Uy<br>(B2C)</span>
+      </button>
+      <button class="cat-btn" onclick="showCat('lazer',this)">
+        <span class="cb-icon">⚡</span>
+        <span class="cb-text">Lazer Kesish<br>Xizmati</span>
+      </button>
+    </div>
+
+    <!-- B2B -->
+    <div class="cat-panel active" id="cat-b2b">
+      <div class="prod-cards">
+        <div class="prod-card">
+          <div class="prod-card-icon">🔩</div>
+          <h3>Zakladnoy listlar</h3>
+          <p>4mm dan 12mm gacha qalinlikdagi po'lat listlar va sertifikatlangan armaturalardan tayyorlangan metall tayanchlar. O'lchamlar: 100×100 dan 400×400 mm gacha va chizmangiz asosida.</p>
+          <br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px">Bepul konsultatsiya olish →</a>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-icon">⚙️</div>
+          <h3>Sanoat shaybalari</h3>
+          <p>DIN va GOST standartlariga javob beradigan, doimiy tebranishlarga chidamli, yuqori aniqlikdagi shtamplangan ulgurji shaybalar. M6 dan M72 gacha barcha o'lchamlar.</p>
+          <br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px">Bepul konsultatsiya olish →</a>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-icon">⚡</div>
+          <h3>Yuqori aniqlikdagi Lazer</h3>
+          <p>Qalin temir listlarni 0.1mm gacha aniqlikda, mutloq silliq chiziq bilan kesish xizmati. DXF/DWG formatidagi chizmangizdan to tayyor mahsulotgacha.</p>
+          <br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px">Bepul konsultatsiya olish →</a>
+        </div>
+      </div>
+
+      <!-- Zakladnoy table -->
+      <div style="margin-top:44px">
+        <div class="lbl" style="margin-bottom:16px">Zakladnoy listlar — texnik jadval</div>
+        <div class="tw">
+          <table>
+            <thead><tr><th>O'lcham (mm)</th><th>Qalinlik</th><th>Armatura</th><th>Vazn (kg)</th><th>Qo'llanilishi</th></tr></thead>
+            <tbody>
+              <tr><td><strong>100×100</strong></td><td>4mm</td><td>Ø10×2</td><td>~0.6</td><td>Engil konstruksiya, perila</td></tr>
+              <tr><td><strong>150×150</strong></td><td>5mm</td><td>Ø10×4</td><td>~1.2</td><td>Darvoza, to'siq tayanchlari</td></tr>
+              <tr><td><strong>200×200</strong></td><td>6mm</td><td>Ø12×4</td><td>~2.5</td><td>O'rtacha yukli ustunlar <span class="badge-tag">Mashhur</span></td></tr>
+              <tr><td><strong>250×250</strong></td><td>8mm</td><td>Ø14×4</td><td>~5.0</td><td>Sanoat konstruksiyalari</td></tr>
+              <tr><td><strong>300×300</strong></td><td>10mm</td><td>Ø16×6</td><td>~9.4</td><td>Og'ir kran yo'laklari <span class="badge-tag">Kuchli</span></td></tr>
+              <tr><td><strong>400×400</strong></td><td>12mm</td><td>Ø16×8</td><td>~17.5</td><td>Ko'prik, industrial ferma</td></tr>
+              <tr><td colspan="5" style="color:var(--rust);font-family:var(--fd);font-size:10px;letter-spacing:2px;text-transform:uppercase">★ Individual o'lchamda ham qabul qilinadi — chizma yuboring</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- B2C -->
+    <div class="cat-panel" id="cat-b2c">
+      <div class="prod-cards">
+        <div class="prod-card">
+          <div class="prod-card-icon">🚪</div>
+          <h3>Premium Darvozalar</h3>
+          <p>Kompyuterda og'irlik balansi hisoblangan, vaqt o'tsa ham yerga tegib qiyshaymaydigan Loft va Modern uslubidagi zamonaviy darvozalar. Pechda bo'yalgan — umrbod zang yo'q.</p>
+          <br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px">Bepul konsultatsiya olish →</a>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-icon">🛡️</div>
+          <h3>Lazerli Reshotkalar</h3>
+          <p>Uyingizni qamoqxonaga aylantirmaydigan, quyosh nurini to'smaydigan, lekin mutloq xavfsiz yaxlit po'lat panjaralar. Har qanday naqsh va geometriya lazer bilan kesiladi.</p>
+          <br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px">Bepul konsultatsiya olish →</a>
+        </div>
+        <div class="prod-card">
+          <div class="prod-card-icon">🪜</div>
+          <h3>Silliq chokli Perilalar</h3>
+          <p>Burchak va ulanish choklari robotlashtirilgan usulda silliqlangan, bolalar qo'lini tirnamaydigan mustahkam zina to'siqlari. Polimer qoplama bilan 25 yillik kafolat.</p>
+          <br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px">Bepul konsultatsiya olish →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAZER -->
+    <div class="cat-panel" id="cat-lazer">
+      <div class="tab-layout">
+        <div>
+          <p class="prod-desc"><strong>Zamonaviy lazer kesish</strong> — qalin temir listlarni kompyuter boshqaruvida, chizmaga qarab, millimetrning o'ndan bir aniqligi bilan kesish. Kesish chizig'i silliq, qirrasi toza — qo'shimcha ishlov talab etmaydi.</p>
+          <p class="prod-desc">Biz <strong>fasad naqshlari, murakkab geometrik chizmalar, texnologik teshiklar</strong> va sanoat plitalarini bir xil aniqlikda kesib beramiz.</p>
+          <div class="prod-sub">Nima kesib beramiz:</div>
+          <ul class="spec-list">
+            <li>Zakladnoy listlar uchun tayyor plastinalar (standart va individual)</li>
+            <li>Fasad va dekorativ naqshlar (arxitektura loyihalari)</li>
+            <li>Sanoat mashinalari uchun korpus va qopqoqlar</li>
+            <li>Murakkab geometriyali konstruktiv elementlar</li>
+            <li>Reklama va ko'rsatmalar uchun metall taxtachalar</li>
+            <li>Elektr shkaf va panel korpuslari</li>
+          </ul>
+          <br><a href="#aloqa" class="btn btn-rust">Bepul konsultatsiya olish →</a>
+        </div>
+        <div>
+          <div class="laser-specs">
+            <div class="laser-card"><div class="laser-val">0.1<span>mm</span></div><div class="laser-key">Kesish aniqligi</div></div>
+            <div class="laser-card"><div class="laser-val">25<span>mm</span></div><div class="laser-key">Maks. qalinlik</div></div>
+            <div class="laser-card"><div class="laser-val">1500<span>×3000</span></div><div class="laser-key">Maks. list o'lchami</div></div>
+            <div class="laser-card"><div class="laser-val">DXF<span>/DWG</span></div><div class="laser-key">Qabul qilinadigan format</div></div>
+          </div>
+          <div class="tw">
+            <table>
+              <thead><tr><th>Material</th><th>Maks. qalinlik</th><th>Sifat</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Yumshoq po'lat (St3)</strong></td><td>25mm</td><td>Toza, silliq</td></tr>
+                <tr><td><strong>Zanglamaydigan po'lat</strong></td><td>15mm</td><td>Yuqori sifat</td></tr>
+                <tr><td><strong>Alyuminiy</strong></td><td>10mm</td><td>Silliq, parlaydigan</td></tr>
+                <tr><td><strong>Mis / Latun</strong></td><td>6mm</td><td>Aniq, toza</td></tr>
+                <tr><td><strong>Galvanizatsiyalangan</strong></td><td>12mm</td><td>Standart</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ ADVANTAGES ══════ -->
+<section class="advantages" id="afzalliklar">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl">Nega aynan MetalDesign.uz</div>
+      <h2 class="h2">Raqobatchilardan<br><em>farqimiz</em></h2>
+    </div>
+    <div class="adv-grid">
+      <div class="adv-card">
+        <div class="adv-num">01</div>
+        <span class="adv-icon">🔥</span>
+        <h3>180°C pechda kukunli bo'yash</h3>
+        <p>Biz mahsulotlarimizni oddiy cho'tkada bo'yamaymiz. Polimer kukun sepilib, maxsus pechda pishiriladi. Bu — zangga qarshi umrbod kafolat degani!</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-num">02</div>
+        <span class="adv-icon">💻</span>
+        <h3>Dasturiy muhandislik (CAD/CAM)</h3>
+        <p>Har bir darvoza yoki konstruksiya oldindan kompyuterda chizilib, unga tushadigan shamol, tebranish va og'irlik yuklamalari hisoblab chiqiladi. Xatolik ehtimoli — 0%.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-num">03</div>
+        <span class="adv-icon">🏭</span>
+        <h3>To'g'ridan-to'g'ri zavod narxi</h3>
+        <p>O'rtakashlar va vositachilarsiz, xomashyoni metallurgiya zavodlaridan to'g'ridan-to'g'ri olganimiz sababli bozordagi eng maqbul narxni beramiz.</p>
+      </div>
+      <div class="adv-card">
+        <div class="adv-num">04</div>
+        <span class="adv-icon">🧹</span>
+        <h3>Changsiz va xavfsiz montaj</h3>
+        <p>Professional guruhimiz uyingiz ta'mirlangan bo'lsa ham, devor va kofellarga ziyon yetkazmasdan, changsiz o'rnatib berishadi. Kafolat bilan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PROCESS ══════ -->
+<section class="process" id="jarayon">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl">Qanday ishlashimiz</div>
+      <h2 class="h2">5 qadam —<br><em>Tayyor</em> mahsulot</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">📋</div>
+        <h3>So'rov yuborish</h3>
+        <p>Chizma, o'lcham yoki eskizingizni yuboring. Telefon, Telegram yoki sayt orqali — qaysi qulay.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">🔧</div>
+        <h3>Bepul o'lchov</h3>
+        <p>Mutaxassisimiz ob'ektingizga kelib, bepul o'lchov oladi, dizayn tanlaydi va smeta chiqaradi.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">✅</div>
+        <h3>Kelishuv</h3>
+        <p>Narx va shartlarga rozilik. Shartnoma tuziladi. Avans to'lovdan keyin ishlab chiqarish boshlanadi.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-icon">⚙️</div>
+        <h3>Ishlab chiqarish</h3>
+        <p>Har bir mahsulot GOST asosida, sertifikatlangan uskunalarda. OTK nazorati — 100% tekshiruv.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-icon">🚚</div>
+        <h3>Yetkazish va montaj</h3>
+        <p>Changsiz, xavfsiz o'rnatish. Standart buyurtma 48 soat. Butun O'zbekiston bo'ylab yetkazib beramiz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ STATS BAR ══════ -->
+<div class="stats-bar">
+  <div class="stats-row reveal">
+    <div class="si">
+      <div class="stat-num" data-target="15">0<span>+</span></div>
+      <div class="stat-lbl">Yirik turar-joy majmualari</div>
+    </div>
+    <div class="si">
+      <div class="stat-num" data-target="500">0<span>+</span></div>
+      <div class="stat-lbl">Mamnun xonadon egalari</div>
+    </div>
+    <div class="si">
+      <div class="stat-num">48<span>soat</span></div>
+      <div class="stat-lbl">Ulgurji buyurtma muddati</div>
+    </div>
+    <div class="si">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-lbl">OTK sinovidan o'tgan</div>
+    </div>
+    <div class="si">
+      <div class="stat-num">0.1<span>mm</span></div>
+      <div class="stat-lbl">Ishlab chiqarish aniqligi</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ REVIEWS ══════ -->
+<section class="reviews" id="ishonch">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl">Hamkorlarimiz fikri</div>
+      <h2 class="h2">Biz haqimizda<br><em>nima deyishadi?</em></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Golden House majmuasi uchun barcha zakladnoylarni MetalDesign'dan oldik. Har bir detal millimetrigacha aniq, svarkasi baquvvat. Qurilish jarayonida bitta ham qaytarilgan mahsulot bo'lmadi.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">GH</div>
+          <div>
+            <div class="reviewer-name">Bosh muhandis</div>
+            <div class="reviewer-role">Golden House majmuasi</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Infinity loyihasi uchun katta hajmda zakladnoy va shaybalar kerak edi. MetalDesign 48 soat ichida yetkazib berdi. Narxi ham, sifati ham — raqobatchilarga tengi yo'q.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">IN</div>
+          <div>
+            <div class="reviewer-name">Loyiha rahbari</div>
+            <div class="reviewer-role">Infinity qurilish loyihasi</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Assalom Sohil uchun maxsus o'lchamdagi konstruksiyalar kerak edi. Chizmani yubordik — ikki kunda tayyor. Lazer kesish aniqligi va payvand sifati — oliy darajada.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">AS</div>
+          <div>
+            <div class="reviewer-name">Texnik direktor</div>
+            <div class="reviewer-role">Assalom Sohil majmuasi</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Assalom Do'stlik ob'ekti uchun yirik ulgurji buyurtma berdik. Muddatga qat'iy rioyа qilindi, har bir mahsulot OTK nazoratidan o'tgan. Doimiy hamkorlikni davom ettiramiz.</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">AD</div>
+          <div>
+            <div class="reviewer-name">Qurilish direktori</div>
+            <div class="reviewer-role">Assalom Do'stlik majmuasi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ TRUST ══════ -->
+<section class="trust">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl">Sifat kafolatlari</div>
+      <h2 class="h2">Siz <em>Ishonch</em><br>Bilan Buyurtma<br>Bera Olasiz</h2>
+    </div>
+    <div class="trust-grid">
+      <div>
+        <p>Biz metallurgiya va qurilish sanoatida yillar davomida ishlaymiz. Mijozlarimiz — Toshkent va viloyatlardagi yirik qurilish kompaniyalari, ishlab chiqarish korxonalari va davlat buyurtmachilar.</p>
+        <p>Har bir buyurtma bitta mas'ul texnik mutaxassis nazoratida bajariladi. Mahsulot jo'natilishidan oldin OTK sifat nazorati o'tkaziladi va foto-hisobot bilan birga yuboriladi.</p>
+        <ul class="guar-list">
+          <li><span class="check">✓</span> GOST standartlariga to'liq muvofiqlik</li>
+          <li><span class="check">✓</span> Har bir mahsulotda sifat pasporti</li>
+          <li><span class="check">✓</span> Muddatga rioya kafolati (shartnomada)</li>
+          <li><span class="check">✓</span> Qaytarish yoki almashtirish siyosati</li>
+          <li><span class="check">✓</span> Ishlab chiqarish jarayoni foto-hisoboti</li>
+          <li><span class="check">✓</span> Texnik maslahat — bepul</li>
+        </ul>
+      </div>
+      <div class="clients-grid">
+        <div class="client-card">
+          <div class="cli-lbl">Turar-joy majmuasi</div>
+          <h4>Golden House</h4>
+          <p>Barcha zakladnoy va konstruksiyalar yetkazib berildi. Doimiy hamkor.</p>
+        </div>
+        <div class="client-card">
+          <div class="cli-lbl">Qurilish loyihasi</div>
+          <h4>Infinity</h4>
+          <p>Yirik ulgurji buyurtma — 48 soatda yetkazib berildi. Sifat kafolati bilan.</p>
+        </div>
+        <div class="client-card">
+          <div class="cli-lbl">Turar-joy majmuasi</div>
+          <h4>Assalom Sohil</h4>
+          <p>Maxsus o'lchamdagi konstruksiyalar lazer kesish va payvand xizmati.</p>
+        </div>
+        <div class="client-card">
+          <div class="cli-lbl">Turar-joy majmuasi</div>
+          <h4>Assalom Do'stlik</h4>
+          <p>OTK nazoratidan o'tgan mahsulotlar. Muddatga qat'iy rioya qilindi.</p>
+        </div>
+      </div>
+      <div class="client-card cli-cta" style="margin-top:14px">
+        <div class="cli-lbl">500+ loyiha</div>
+        <h4>Sizning kompaniyangiz?</h4>
+        <p>Hozir murojaat qiling — birinchi buyurtmaga maxsus narx.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FAQ ══════ -->
+<section class="faq">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl">Tez-tez beriladigan savollar</div>
+      <h2 class="h2">Savollaringizga<br><em>javoblar</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>O'lchash va smeta hisoblash pullikmi?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><p>Yo'q, mutaxassisimiz uyingizga yoki qurilish ob'ektiga borib o'lchash, dizayn tanlash va smeta chiqarib berish xizmatini mutloq BEPUL amalga oshiradi. Hech qanday majburiyat yo'q.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Viloyatlarga ham yetkazib berish bormi?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><p>Hozirda yetkazib berish xizmati faqat Toshkent shahri va Toshkent viloyati bo'ylab amalga oshiriladi. Boshqa hududlardagi mijozlar mahsulotni o'zlari olib ketishlari mumkin.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Chizmalarimiz asosida individual buyurtma qilsak bo'ladimi?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><p>Albatta! Muhandislarimiz siz taqdim etgan har qanday AutoCAD, SolidWorks chizmalari yoki oddiy eskizlar asosida lazerda aniq kesib berishadi. Chizmangizni Telegram orqali yuboring.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Standart buyurtma uchun qancha vaqt ketadi?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><p>Buyurtma muddati mahsulot o'lchamiga qarab farq qiladi — 24 soatdan boshlanadi. Murakkab yoki katta hajmli loyihalar uchun muddat oldindan kelishiladi va qat'iy amal qilinadi.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Pechda bo'yash va galvanizatsiya qanday farq qiladi?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><p>Pechda kukunli bo'yash — polimer qoplama bo'lib, estetik ko'rinish va zangga qarshi 10-15 yillik himoya beradi. Galvanizatsiya esa rux qoplama bo'lib, ko'proq sanoat va tashqi muhit uchun 25+ yillik eng kuchli himoya hisoblanadi.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>To'lov qanday amalga oshiriladi?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a"><p>To'lov uch usulda qabul qilinadi: naqd pul, perechesleniya (bank o'tkazmasi) va kartadan kartaga pul o'tkazish orqali. Avans to'lovdan so'ng ishlab chiqarish boshlanadi.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CTA ══════ -->
+<section class="cta-section" id="aloqa">
+  <div class="cta-inner">
+    <div>
+      <div class="cta-title">Metall borasida<br>tavakkal qilmang,<br>professionallarga<br>ishoning!</div>
+      <p class="cta-sub">Ma'lumotlaringizni qoldiring. Muhandisimiz siz bilan <strong style="color:#fff">15 daqiqa</strong> ichida bog'lanib, loyihangiz uchun bepul 3D model va smetani tayyorlab beradi.</p>
+    </div>
+    <form class="cta-form" onsubmit="handleSubmit(event)">
+      <input class="cta-input" type="text" placeholder="Ismingizni kiriting" required>
+      <input class="cta-input" type="tel" placeholder="+998 __ ___ __ __" required>
+      <input class="cta-input" type="text" placeholder="Kompaniya nomi (ixtiyoriy)">
+      <select class="cta-input">
+        <option value="" disabled selected>Qiziqtirgan xizmat</option>
+        <option>Zakladnoy listlar (B2B)</option>
+        <option>Sanoat shaybalari (B2B)</option>
+        <option>Premium darvozalar (B2C)</option>
+        <option>Lazerli panjaralar (B2C)</option>
+        <option>Perilalar (B2C)</option>
+        <option>Lazer kesish xizmati</option>
+        <option>Bir necha xizmat</option>
+      </select>
+      <button type="submit" class="btn btn-white" id="submitBtn">BEPUL KONSULTATSIYA OLISH →</button>
+      <div class="cta-note">
+        yoki Telegram: <a href="https://t.me/metal_design_uz">@metal_design_uz</a><br>
+        📞 <a href="tel:+998991501111">+998 99 150-11-11</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="f-logo">Metal<em>Design</em>.uz</span>
+      <p class="f-desc">Metallni qayta ishlash, lazer kesish va sanoat detallar ishlab chiqarish. Toshkent, O'zbekiston.</p>
+    </div>
+    <div class="f-col">
+      <h5>Mahsulotlar</h5>
+      <ul>
+        <li><a href="#mahsulotlar">Zakladnoy listlar</a></li>
+        <li><a href="#mahsulotlar">Sanoat shaybalari</a></li>
+        <li><a href="#mahsulotlar">Premium darvozalar</a></li>
+        <li><a href="#mahsulotlar">Lazerli panjaralar</a></li>
+        <li><a href="#mahsulotlar">Silliq chokli perilalar</a></li>
+        <li><a href="#mahsulotlar">Lazer kesish</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Kompaniya</h5>
+      <ul>
+        <li><a href="#">Biz haqimizda</a></li>
+        <li><a href="#">Sifat nazorati</a></li>
+        <li><a href="#">Sertifikatlar</a></li>
+        <li><a href="#">Loyihalar</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5>Aloqa</h5>
+      <div class="f-contact">📍 <span>Toshkent shahri, Yunusobod tumani, Nazarbek Tapovich ko'chasi</span></div>
+      <div class="f-contact">📞 <span><strong><a href="tel:+998991501111" style="color:var(--white)">+998 99 150-11-11</a></strong></span></div>
+      <div class="f-contact">🕐 <span>Dushanba–Shanba: 09:00–18:00<br>Yakshanba — dam olish</span></div>
+      <div class="f-contact">💬 <span><a href="https://t.me/metal_design_uz" style="color:var(--rust-bright)">@metal_design_uz</a></span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 MetalDesign.uz — Barcha huquqlar himoyalangan</span>
+    <span><a href="#">Maxfiylik siyosati</a> · <a href="#">Shartnoma shartlari</a></span>
+  </div>
+</footer>
+
+<script>
+// ── Mobile menu
+function openMob(){document.getElementById('mobMenu').classList.add('open');document.body.style.overflow='hidden'}
+function closeMob(){document.getElementById('mobMenu').classList.remove('open');document.body.style.overflow=''}
+
+// ── Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').style.background=
+    window.scrollY>50?'rgba(6,6,6,0.99)':'rgba(12,12,12,0.97)';
+});
+
+// ── Scroll reveal
+const revEls=document.querySelectorAll('.reveal');
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.07}).observe&&revEls.forEach(el=>
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:.07}).observe(el)
+);
+
+// ── Category tabs
+function showCat(name,btn){
+  document.querySelectorAll('.cat-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('cat-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── FAQ accordion
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+// ── Stat counter animation
+function animateCount(el,target,suffix){
+  let start=null;
+  const dur=1600;
+  const isDecimal=target<10&&target%1!==0;
+  const step=ts=>{
+    if(!start)start=ts;
+    const p=Math.min((ts-start)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    const val=target*ease;
+    el.innerHTML=(isDecimal?val.toFixed(1):Math.floor(val))+'<span>'+suffix+'</span>';
+    if(p<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const statsBar=document.querySelector('.stats-bar');
+if(statsBar){
+  new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){
+      const pairs=[{t:15,s:'+'},{t:500,s:'+'},{t:100,s:'%'}];
+      let idx=0;
+      document.querySelectorAll('[data-target]').forEach(el=>{
+        animateCount(el,pairs[idx]?.t||15,pairs[idx]?.s||'+');
+        idx++;
+      });
+    }
+  },{threshold:.3}).observe(statsBar);
+}
+
+// ── Form submit
+async function handleSubmit(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const inputs = e.target.querySelectorAll('input, select');
+
+  const ism      = inputs[0].value.trim();
+  const telefon  = inputs[1].value.trim();
+  const kompaniya= inputs[2].value.trim() || '—';
+  const xizmat   = inputs[3].value || '—';
+
+  // Telegram bot sozlamalari
+  const TOKEN   = '8718008936:AAHq5v8nAMgcmZkdV9LD3tVcwsM4WjeodpI';
+  const CHAT_ID = '1959711038';
+
+  const matn = `🔔 *Yangi so'rov — MetalDesign.uz*
+
+👤 *Ism:* ${ism}
+📞 *Telefon:* ${telefon}
+🏢 *Kompaniya:* ${kompaniya}
+🔧 *Xizmat:* ${xizmat}
+
+⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+
+  // Tugmani loading holatiga o'tkazish
+  btn.textContent = '⏳ Yuborilmoqda...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: matn,
+        parse_mode: 'Markdown'
+      })
+    });
+
+    const data = await res.json();
+
+    if(data.ok){
+      btn.textContent = '✅ So\'rovingiz qabul qilindi!';
+      btn.style.background = '#1a1a1a';
+      btn.style.color = '#4ade80';
+      e.target.reset();
+    } else {
+      throw new Error('Telegram xato');
+    }
+  } catch(err){
+    btn.textContent = '❌ Xato! Qayta urinib ko\'ring';
+    btn.style.background = '#1a1a1a';
+    btn.style.color = '#f87171';
+  }
+
+  btn.disabled = false;
+  setTimeout(()=>{
+    btn.textContent = 'BEPUL KONSULTATSIYA OLISH →';
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 4000);
+}
+</script>
+</body>
+</html>
