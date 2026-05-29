@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MetalDesign.uz — Millimetr aniqligidagi metall konstruksiyalar</title>
+<meta name="description" content="Zakladnoy, shayba, darvoza, perila va lazer kesish xizmati. To'g'ridan-to'g'ri zavoddan. Toshkent, O'zbekiston.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+:root{
+  --iron:#141414;--iron-mid:#1e1e1e;--iron-light:#282828;
+  --rust:#c0392b;--rust-bright:#e74c3c;
+  --chrome:#9aa5ad;--chrome-l:#d4dce2;
+  --white:#f2ede6;--steel:#525963;
+  --fd:'Oswald',sans-serif;--fb:'DM Sans',sans-serif;
+  --side:clamp(18px,5vw,80px);
+  --gap:clamp(50px,7vw,110px);
+}
+body{font-family:var(--fb);background:var(--iron);color:var(--white);overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");opacity:.5}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{max-width:100%;display:block}
+.lbl{font-family:var(--fd);font-size:11px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--rust);display:flex;align-items:center;gap:12px}
+.lbl::before{content:'';width:28px;height:1px;background:var(--rust)}
+.h2{font-family:var(--fd);font-size:clamp(36px,5.5vw,68px);font-weight:700;text-transform:uppercase;line-height:.94;letter-spacing:-.5px;margin-top:14px}
+.h2 em{font-style:normal;color:var(--rust)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:15px 30px;transition:all .25s;cursor:pointer;white-space:nowrap}
+.btn-rust{background:var(--rust);color:var(--white);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-rust:hover{background:var(--rust-bright);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--chrome-l);border:1px solid rgba(154,165,173,.3)}
+.btn-outline:hover{border-color:var(--rust);color:var(--rust-bright)}
+.btn-white{background:var(--white);color:var(--rust);font-weight:700}
+.btn-white:hover{background:var(--iron);color:var(--white);border:1px solid rgba(255,255,255,.1)}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 var(--side);height:62px;background:rgba(12,12,12,.97);border-bottom:1px solid rgba(192,57,43,.3);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nav-logo{font-family:var(--fd);font-size:20px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.nav-logo em{font-style:normal;color:var(--rust)}
+.nav-links{display:flex;align-items:center;gap:clamp(14px,2vw,34px);list-style:none}
+.nav-links a{font-family:var(--fd);font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--chrome);transition:color .2s}
+.nav-links a:hover{color:var(--rust-bright)}
+.nav-cta{background:var(--rust)!important;color:var(--white)!important;padding:8px 18px;font-size:11px!important;font-family:var(--fd);font-weight:600;letter-spacing:2px;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));transition:background .2s!important}
+.nav-cta:hover{background:var(--rust-bright)!important}
+.nav-right{display:flex;align-items:center;gap:16px}
+.lang-switch{display:flex;align-items:center;border:1px solid rgba(255,255,255,.15);overflow:hidden}
+.lang-btn{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:6px 11px;color:var(--chrome);transition:all .2s;background:transparent;border:none;border-right:1px solid rgba(255,255,255,.1)}
+.lang-btn:last-child{border-right:none}
+.lang-btn.active{background:var(--rust);color:#fff}
+.lang-btn:hover:not(.active){background:rgba(255,255,255,.06);color:var(--chrome-l)}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:var(--white);transition:all .3s}
+.mob-menu{display:none;position:fixed;inset:0;z-index:999;background:rgba(8,8,8,.99);flex-direction:column;align-items:center;justify-content:center;gap:26px;backdrop-filter:blur(16px)}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:var(--fd);font-size:clamp(24px,7vw,38px);font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--white);transition:color .2s}
+.mob-menu a:hover{color:var(--rust)}
+.mob-close{position:absolute;top:20px;right:var(--side);font-size:26px;color:var(--chrome);cursor:pointer;background:none;border:none;line-height:1}
+.mob-phone{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--rust);letter-spacing:1px}
+.mob-lang{display:flex;gap:10px;margin-top:10px}
+.mob-lang .lang-btn{border:1px solid rgba(255,255,255,.2);font-size:14px;padding:8px 18px}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:100px var(--side) 70px;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(192,57,43,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(192,57,43,.05) 1px,transparent 1px);background-size:64px 64px}
+.hero-panel{position:absolute;right:-2%;top:0;bottom:0;width:46%;background:linear-gradient(135deg,var(--iron-mid) 0%,#1a1a1a 100%);clip-path:polygon(14% 0,100% 0,100% 100%,0% 100%)}
+.hero-panel::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--rust),transparent);opacity:.6}
+.hero-content{position:relative;z-index:2;max-width:660px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.4);padding:7px 16px;font-family:var(--fd);font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--rust-bright);margin-bottom:28px}
+.hero-badge::before{content:'';width:7px;height:7px;background:var(--rust-bright);border-radius:50%;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}
+.hero h1{font-family:var(--fd);font-size:clamp(40px,6.5vw,86px);font-weight:700;text-transform:uppercase;line-height:.92;letter-spacing:-1px;margin-bottom:6px}
+.hero h1 .stroke{-webkit-text-stroke:1.5px var(--chrome-l);color:transparent}
+.hero h1 em{font-style:normal;color:var(--rust);display:block}
+.hero-sub{font-size:clamp(14px,1.4vw,17px);font-weight:300;line-height:1.78;color:var(--chrome);max-width:520px;padding-left:18px;border-left:3px solid var(--rust);margin-bottom:40px;margin-top:22px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:54px}
+.hero-stats{display:flex;gap:clamp(20px,4vw,52px);flex-wrap:wrap}
+.stat-num{font-family:var(--fd);font-size:clamp(32px,3.5vw,48px);font-weight:700;line-height:1;color:var(--white)}
+.stat-num span{color:var(--rust)}
+.stat-lbl{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--chrome);margin-top:5px}
+.hero-visual{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:clamp(260px,26vw,390px);opacity:.88;z-index:1}
+.ticker{background:var(--rust);overflow:hidden;white-space:nowrap;padding:12px 0;position:relative;z-index:10}
+.ticker-inner{display:inline-flex;animation:tick 30s linear infinite}
+.ticker-inner span{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.9);padding:0 36px}
+.ticker-inner span::before{content:'⬥';margin-right:12px;opacity:.6}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+section{position:relative;z-index:1;padding:var(--gap) var(--side)}
+.sec-head{margin-bottom:clamp(32px,4vw,60px)}
+.problems{background:var(--iron-mid);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);margin-top:clamp(28px,4vw,56px)}
+.prob-card{background:var(--iron);border:1px solid rgba(255,255,255,.05);border-top:3px solid var(--rust);padding:32px 24px;transition:transform .25s,border-top-color .25s}
+.prob-card:hover{transform:translateY(-4px);border-top-color:var(--rust-bright)}
+.prob-icon{font-size:32px;margin-bottom:18px}
+.prob-card h3{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--white);margin-bottom:12px;letter-spacing:.3px}
+.prob-card p{font-size:14px;font-weight:300;line-height:1.72;color:var(--chrome)}
+.products{background:var(--iron)}
+.prod-top{display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px;margin-bottom:36px}
+.prod-intro{font-size:clamp(14px,1.3vw,17px);font-weight:300;line-height:1.75;color:var(--chrome);max-width:520px;margin-top:14px}
+.cat-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:40px;background:var(--iron-mid);border:1px solid rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.cat-btn{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:0;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:none;border-right:1px solid rgba(255,255,255,.06);color:var(--chrome);cursor:pointer;transition:all .25s;background:transparent;position:relative}
+.cat-btn:last-child{border-right:none}
+.cat-btn .cb-icon{font-size:18px;line-height:1;transition:transform .25s}
+.cat-btn .cb-text{font-size:10px;letter-spacing:1.5px}
+.cat-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--rust);transform:scaleX(0);transform-origin:center;transition:transform .3s ease}
+.cat-btn.active{background:rgba(192,57,43,.12);color:var(--white)}
+.cat-btn.active::after{transform:scaleX(1)}
+.cat-btn.active .cb-icon{transform:scale(1.2)}
+.cat-btn:hover:not(.active){background:rgba(255,255,255,.03);color:var(--chrome-l)}
+.cat-panel{display:none}.cat-panel.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.prod-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:24px}
+.prod-card{background:var(--iron-mid);border:1px solid rgba(255,255,255,.06);border-top:3px solid rgba(192,57,43,.5);padding:28px 22px;transition:border-top-color .2s,transform .2s}
+.prod-card:hover{border-top-color:var(--rust);transform:translateY(-3px)}
+.prod-card-icon{font-size:30px;margin-bottom:14px}
+.prod-card h3{font-family:var(--fd);font-size:18px;font-weight:600;color:var(--white);margin-bottom:10px}
+.prod-card p{font-size:13px;font-weight:300;line-height:1.68;color:var(--chrome)}
+.prod-desc{font-size:clamp(13px,1.2vw,15px);font-weight:300;line-height:1.82;color:var(--chrome);margin-bottom:20px}
+.prod-desc strong{color:var(--chrome-l);font-weight:600}
+.prod-sub{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin:24px 0 12px}
+.spec-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.spec-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:300;color:var(--chrome);line-height:1.5}
+.spec-list li::before{content:'→';color:var(--rust);flex-shrink:0;font-size:12px;margin-top:1px}
+.tab-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:start}
+.tw{overflow-x:auto;margin-bottom:24px;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:400px}
+thead tr{border-bottom:2px solid var(--rust)}
+thead th{font-family:var(--fd);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--chrome);padding:11px 14px;text-align:left;white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s}
+tbody tr:hover{background:rgba(255,255,255,.03)}
+tbody td{padding:11px 14px;color:var(--chrome);font-weight:300;line-height:1.4}
+tbody td strong{color:var(--chrome-l);font-weight:500}
+.badge-tag{display:inline-block;background:rgba(192,57,43,.18);color:var(--rust-bright);font-family:var(--fd);font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:2px 7px;margin-left:6px}
+.laser-specs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.laser-card{background:var(--iron-mid);border:1px solid rgba(255,255,255,.06);padding:22px 18px;border-top:2px solid var(--rust)}
+.laser-val{font-family:var(--fd);font-size:clamp(26px,3vw,36px);font-weight:700;color:var(--white);line-height:1}
+.laser-val span{font-size:.5em;color:var(--chrome)}
+.laser-key{font-size:11px;font-weight:300;color:var(--chrome);margin-top:5px}
+.advantages{background:var(--iron-mid)}
+.adv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:20px;margin-top:clamp(28px,4vw,56px)}
+.adv-card{position:relative;background:var(--iron);border:1px solid rgba(255,255,255,.05);padding:32px 26px;overflow:hidden;transition:border-color .25s,transform .25s}
+.adv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--rust);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.adv-card:hover::before{transform:scaleX(1)}
+.adv-card:hover{border-color:rgba(192,57,43,.25);transform:translateY(-4px)}
+.adv-num{font-family:var(--fd);font-size:52px;font-weight:700;color:rgba(255,255,255,.04);line-height:1;margin-bottom:12px}
+.adv-icon{font-size:26px;display:block;margin-bottom:14px}
+.adv-card h3{font-family:var(--fd);font-size:17px;font-weight:600;color:var(--white);margin-bottom:10px}
+.adv-card p{font-size:13px;font-weight:300;line-height:1.72;color:var(--chrome)}
+.process{background:var(--iron)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid rgba(255,255,255,.05);margin-top:clamp(28px,4vw,56px)}
+.step{padding:32px 24px;border-right:1px solid rgba(255,255,255,.05);transition:background .2s}
+.step:last-child{border-right:none}
+.step:hover{background:rgba(192,57,43,.04)}
+.step-num{font-family:var(--fd);font-size:44px;font-weight:700;color:rgba(192,57,43,.18);line-height:1;margin-bottom:16px}
+.step-icon{font-size:26px;margin-bottom:14px}
+.step h3{font-family:var(--fd);font-size:16px;font-weight:600;color:var(--white);margin-bottom:8px}
+.step p{font-size:13px;font-weight:300;line-height:1.68;color:var(--chrome)}
+.stats-bar{background:var(--iron-light);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);padding:56px var(--side)}
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.stats-row .si{text-align:center;padding:0 20px;border-right:1px solid rgba(255,255,255,.06)}
+.stats-row .si:last-child{border-right:none}
+.si .stat-num{font-size:clamp(32px,4vw,52px)}
+.reviews{background:var(--iron-mid)}
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:clamp(28px,4vw,56px)}
+.review-card{background:var(--iron);border:1px solid rgba(255,255,255,.06);border-left:3px solid var(--rust);padding:32px 28px;transition:border-left-color .2s}
+.review-card:hover{border-left-color:var(--rust-bright)}
+.review-stars{color:var(--rust);font-size:16px;letter-spacing:2px;margin-bottom:16px}
+.review-text{font-size:15px;font-weight:300;line-height:1.8;color:var(--chrome-l);font-style:italic;margin-bottom:20px}
+.review-text::before{content:'"';font-size:40px;font-family:var(--fd);color:rgba(192,57,43,.25);line-height:0;vertical-align:-16px;margin-right:4px}
+.reviewer{display:flex;align-items:center;gap:14px}
+.reviewer-avatar{width:44px;height:44px;background:rgba(192,57,43,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:16px;font-weight:700;color:var(--rust);flex-shrink:0}
+.reviewer-name{font-family:var(--fd);font-size:14px;font-weight:600;color:var(--white)}
+.reviewer-role{font-size:12px;font-weight:300;color:var(--chrome);margin-top:2px}
+.faq{background:var(--iron)}
+.faq-list{display:flex;flex-direction:column;gap:0;margin-top:clamp(28px,4vw,56px);border:1px solid rgba(255,255,255,.06)}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.06)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 28px;cursor:pointer;transition:background .2s;user-select:none}
+.faq-q:hover{background:rgba(192,57,43,.05)}
+.faq-q span{font-family:var(--fd);font-size:16px;font-weight:600;color:var(--white);letter-spacing:.3px}
+.faq-icon{width:28px;height:28px;flex-shrink:0;background:rgba(192,57,43,.12);display:flex;align-items:center;justify-content:center;color:var(--rust);font-size:18px;font-weight:300;transition:transform .3s,background .2s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--rust);color:var(--white)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:320px;padding-bottom:22px}
+.faq-a p{padding:0 28px;font-size:14px;font-weight:300;line-height:1.8;color:var(--chrome)}
+.trust{background:var(--iron-mid)}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:start;margin-top:clamp(28px,4vw,56px)}
+.trust p{font-size:clamp(14px,1.3vw,16px);font-weight:300;line-height:1.82;color:var(--chrome);margin-bottom:18px}
+.guar-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.guar-list li{display:flex;align-items:center;gap:13px;font-size:14px;font-weight:400;color:var(--chrome-l)}
+.check{width:24px;height:24px;flex-shrink:0;background:rgba(192,57,43,.15);color:var(--rust-bright);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.clients-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.client-card{background:var(--iron);border:1px solid rgba(255,255,255,.06);padding:22px;transition:border-color .2s}
+.client-card:hover{border-color:rgba(192,57,43,.3)}
+.cli-lbl{font-family:var(--fd);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
+.client-card h4{font-family:var(--fd);font-size:18px;font-weight:700;color:var(--white);margin-bottom:7px}
+.client-card p{font-size:12px;font-weight:300;color:var(--chrome);line-height:1.6}
+.cli-cta{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.3)}
+.cli-cta .cli-lbl{color:var(--rust)}
+.cli-cta h4{color:var(--rust-bright)}
+.cta-section{background:var(--rust);padding:clamp(56px,8vw,110px) var(--side);position:relative;overflow:hidden}
+.cta-section::before{content:'METALDESIGN';position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:var(--fd);font-size:clamp(70px,13vw,190px);font-weight:700;text-transform:uppercase;color:rgba(0,0,0,.11);white-space:nowrap;pointer-events:none;letter-spacing:-4px}
+.cta-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:clamp(36px,5vw,72px);align-items:center}
+.cta-title{font-family:var(--fd);font-size:clamp(38px,5.5vw,76px);font-weight:700;text-transform:uppercase;line-height:.92;color:var(--white);letter-spacing:-1px}
+.cta-sub{font-size:clamp(14px,1.3vw,16px);font-weight:300;color:rgba(255,255,255,.8);margin-top:18px;line-height:1.72;max-width:480px}
+.cta-form{display:flex;flex-direction:column;gap:11px;min-width:clamp(270px,24vw,350px)}
+.cta-input{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.28);color:var(--white);padding:14px 16px;font-family:var(--fb);font-size:14px;outline:none;width:100%;transition:border-color .2s}
+.cta-input::placeholder{color:rgba(255,255,255,.42)}
+.cta-input:focus{border-color:rgba(255,255,255,.7)}
+.cta-input option{background:var(--iron);color:var(--white)}
+.cta-note{font-size:11px;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.5px;line-height:1.6}
+.cta-note a{color:rgba(255,255,255,.7);text-decoration:underline}
+footer{background:#0b0b0b;padding:clamp(44px,6vw,76px) var(--side) 24px;border-top:1px solid rgba(192,57,43,.22)}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(24px,3.5vw,52px);margin-bottom:44px}
+.f-logo{font-family:var(--fd);font-size:24px;font-weight:700;display:block;margin-bottom:14px}
+.f-logo em{font-style:normal;color:var(--rust)}
+.f-desc{font-size:13px;font-weight:300;color:var(--chrome);line-height:1.75;max-width:250px}
+.f-col h5{font-family:var(--fd);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin-bottom:18px}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.f-col ul a{font-size:13px;font-weight:300;color:var(--chrome);transition:color .2s}
+.f-col ul a:hover{color:var(--white)}
+.f-contact{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:300;color:var(--chrome);margin-bottom:11px;line-height:1.5}
+.f-contact strong{color:var(--white);font-weight:500;display:block}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#444;font-weight:300}
+.footer-bottom a{color:#444;transition:color .2s}
+.footer-bottom a:hover{color:var(--chrome)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:1024px){.steps{grid-template-columns:repeat(3,1fr)}.step:nth-child(3){border-right:none}.step{border-bottom:1px solid rgba(255,255,255,.05)}}
+@media(max-width:900px){.nav-links,.nav-phone{display:none}.burger{display:flex}.hero-panel,.hero-visual{display:none}.prob-grid{grid-template-columns:1fr}.tab-layout{grid-template-columns:1fr}.trust-grid{grid-template-columns:1fr}.cta-inner{grid-template-columns:1fr}.cta-form{min-width:100%}.footer-top{grid-template-columns:1fr 1fr}.stats-row{grid-template-columns:repeat(3,1fr)}.stats-row .si:nth-child(3){border-right:none}.reviews-grid{grid-template-columns:1fr}.prod-top{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.nav-right{gap:10px}}
+@media(max-width:600px){.hero h1{font-size:clamp(38px,10vw,62px)}.hero-actions{flex-direction:column}.btn{width:100%;justify-content:center}.adv-grid{grid-template-columns:1fr}.laser-specs{grid-template-columns:1fr 1fr}.footer-top{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr 1fr}.stats-row .si{border-right:none;border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0}.stats-row .si:last-child{border-bottom:none}.steps{grid-template-columns:1fr}.step{border-right:none!important}.tab-btn{padding:10px 14px;font-size:10px}.clients-grid{grid-template-columns:1fr}.cta-title{font-size:clamp(34px,8vw,54px)}.prob-grid{grid-template-columns:1fr}.faq-q{padding:18px 18px}.faq-a p{padding:0 18px}.reviews-grid{grid-template-columns:1fr}}
+@media(max-width:380px){.hero h1{font-size:36px}.laser-specs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#muammo" onclick="closeMob()" data-i18n="nav_problem">Muammo</a>
+  <a href="#mahsulotlar" onclick="closeMob()" data-i18n="nav_products">Mahsulotlar</a>
+  <a href="#afzalliklar" onclick="closeMob()" data-i18n="nav_advantages">Afzalliklar</a>
+  <a href="#jarayon" onclick="closeMob()" data-i18n="nav_process">Jarayon</a>
+  <a href="#ishonch" onclick="closeMob()" data-i18n="nav_trust">Ishonch</a>
+  <a href="#aloqa" onclick="closeMob()" class="btn btn-rust" data-i18n="nav_cta">Bepul konsultatsiya olish</a>
+  <a href="tel:+998991501111" class="mob-phone">📞 +998 99 150-11-11</a>
+  <div class="mob-lang">
+    <button class="lang-btn" onclick="setLang('uz')">UZ</button>
+    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">Metal<em>Design</em>.uz</div>
+  <ul class="nav-links">
+    <li><a href="#muammo" data-i18n="nav_problem">Muammo</a></li>
+    <li><a href="#mahsulotlar" data-i18n="nav_products">Mahsulotlar</a></li>
+    <li><a href="#afzalliklar" data-i18n="nav_advantages">Afzalliklar</a></li>
+    <li><a href="#jarayon" data-i18n="nav_process">Jarayon</a></li>
+    <li><a href="#ishonch" data-i18n="nav_trust">Ishonch</a></li>
+    <li><a href="#aloqa" class="nav-cta" data-i18n="nav_cta">Bepul konsultatsiya olish</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="uz" onclick="setLang('uz')">UZ</button>
+      <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+    <div class="burger" onclick="openMob()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-panel"></div>
+  <div class="hero-visual">
+    <svg viewBox="0 0 380 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#5a5f68"/><stop offset="50%" style="stop-color:#3a3d42"/><stop offset="100%" style="stop-color:#252729"/></linearGradient>
+        <linearGradient id="rg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#4a4f55"/><stop offset="100%" style="stop-color:#2a2d30"/></linearGradient>
+        <filter id="ps"><feDropShadow dx="6" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".6"/></filter>
+      </defs>
+      <text x="190" y="38" fill="#c0392b" font-size="12" font-family="Oswald,sans-serif" font-weight="600" text-anchor="middle" letter-spacing="2">200×200mm</text>
+      <line x1="70" y1="52" x2="310" y2="52" stroke="#c0392b" stroke-width="1" stroke-dasharray="5,3"/>
+      <line x1="70" y1="46" x2="70" y2="58" stroke="#c0392b" stroke-width="1.5"/>
+      <line x1="310" y1="46" x2="310" y2="58" stroke="#c0392b" stroke-width="1.5"/>
+      <rect x="70" y="64" width="240" height="230" fill="url(#sg)" rx="2" filter="url(#ps)"/>
+      <rect x="70" y="64" width="240" height="5" fill="#6a7080" rx="1"/>
+      <rect x="70" y="64" width="5" height="230" fill="#5a6070"/>
+      <line x1="70" y1="141" x2="310" y2="141" stroke="#444" stroke-width=".6" opacity=".5"/>
+      <line x1="70" y1="218" x2="310" y2="218" stroke="#444" stroke-width=".6" opacity=".5"/>
+      <line x1="150" y1="64" x2="150" y2="294" stroke="#444" stroke-width=".6" opacity=".5"/>
+      <line x1="230" y1="64" x2="230" y2="294" stroke="#444" stroke-width=".6" opacity=".5"/>
+      <circle cx="92" cy="86" r="10" fill="#c0392b" opacity=".9"/><circle cx="288" cy="86" r="10" fill="#c0392b" opacity=".9"/>
+      <circle cx="92" cy="272" r="10" fill="#c0392b" opacity=".9"/><circle cx="288" cy="272" r="10" fill="#c0392b" opacity=".9"/>
+      <rect x="70" y="64" width="48" height="4" fill="#c0392b"/><rect x="70" y="64" width="4" height="48" fill="#c0392b"/>
+      <rect x="262" y="64" width="48" height="4" fill="#c0392b"/><rect x="306" y="64" width="4" height="48" fill="#c0392b"/>
+      <rect x="70" y="284" width="48" height="4" fill="#c0392b"/><rect x="70" y="250" width="4" height="44" fill="#c0392b"/>
+      <rect x="262" y="284" width="48" height="4" fill="#c0392b"/><rect x="306" y="250" width="4" height="44" fill="#c0392b"/>
+      <rect x="128" y="294" width="12" height="100" fill="url(#rg)" rx="2"/><rect x="184" y="294" width="12" height="100" fill="url(#rg)" rx="2"/><rect x="240" y="294" width="12" height="100" fill="url(#rg)" rx="2"/>
+      <rect x="128" y="386" width="12" height="8" fill="#c0392b" rx="1"/><rect x="184" y="386" width="12" height="8" fill="#c0392b" rx="1"/><rect x="240" y="386" width="12" height="8" fill="#c0392b" rx="1"/>
+      <text x="340" y="184" fill="#888" font-size="11" font-family="Oswald,sans-serif" font-weight="500" text-anchor="middle" letter-spacing="1">8mm</text>
+      <line x1="314" y1="64" x2="314" y2="294" stroke="#555" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="190" y="196" fill="rgba(255,255,255,0.03)" font-size="36" font-family="Oswald,sans-serif" font-weight="700" text-anchor="middle" letter-spacing="2">ZAKLADNOY</text>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero_badge">Toshkent · O'zbekiston · B2B &amp; B2C Ishlab chiqarish</div>
+    <h1 class="display">
+      <span class="stroke" data-i18n="hero_h1_1">Poydevordan</span>
+      <em data-i18n="hero_h1_2">Darvozagacha</em>
+      <span data-i18n="hero_h1_3">Millimetr Aniqlik</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero_sub">O'zbekistondagi yirik qurilish kompaniyalari va shinam xonadonlar uchun og'ir sanoat standartidagi zakladnoy, shayba, darvoza, perila va lazer xizmati — to'g'ridan-to'g'ri zavodning o'zidan!</p>
+    <div class="hero-actions">
+      <a href="#aloqa" class="btn btn-rust"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">500<span>+</span></div><div class="stat-lbl" data-i18n="hero_stat1">Mamnun mijozlar</div></div>
+      <div><div class="stat-num">0.1<span>mm</span></div><div class="stat-lbl" data-i18n="hero_stat2">Lazer aniqligi</div></div>
+      <div><div class="stat-num">48<span data-i18n="unit_hour">soat</span></div><div class="stat-lbl" data-i18n="hero_stat3">Standart muddat</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner" id="tickerInner"></div></div>
+
+<!-- PROBLEMS -->
+<section class="problems" id="muammo">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl" data-i18n="prob_label">Nega ko'p loyihalar muvaffaqiyatsizlikka uchraydi</div>
+      <h2 class="h2" data-i18n="prob_title">Metall borasidagi xatolar <em>qanchaga tushishini</em> bilasizmi?</h2>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card"><div class="prob-icon">⚠️</div><h3 data-i18n="prob1_h">Sifatsiz svarka va yupqa listlar</h3><p data-i18n="prob1_p">Sifatsiz ustalar tomonidan qilingan zakladnoy yoki darvozalar yuklamani ko'tarmay egiladi, vaqt o'tib sinadi yoki poydevordan sug'urilib chiqadi. Bu — ko'rinmas, lekin halokatli nuqson.</p></div>
+      <div class="prob-card"><div class="prob-icon">🦠</div><h3 data-i18n="prob2_h">Doimiy zanglash muammosi</h3><p data-i18n="prob2_p">Oddiy bo'yoq bilan bo'yalgan ko'cha eshiklari, panjara va perilalar birinchi qishdayoq zanglab, uy fassadini rasvo qiladi. Har yili qayta bo'yash esa qo'shimcha xarajat.</p></div>
+      <div class="prob-card"><div class="prob-icon">📏</div><h3 data-i18n="prob3_h">Qiyshiq o'lcham va vaqt yo'qotish</h3><p data-i18n="prob3_p">Eski uslubda, bolgarkada qo'lda kesilgan detallar montaj paytida bir-biriga tushmaydi. Qurilish vaqti cho'ziladi, pulingiz havoga uchadi. 0.1mm aniqlik — bu bizning standartimiz.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="mahsulotlar">
+  <div class="reveal">
+    <div class="prod-top">
+      <div>
+        <div class="lbl" data-i18n="prod_label">Mahsulotlar katalogi</div>
+        <h2 class="h2" data-i18n="prod_title">Har qanday murakkablikdagi metall muammolarga <em>yagona yechim</em></h2>
+        <p class="prod-intro" data-i18n="prod_intro">Chizmangizni yuboring — qolgan hamma narsani biz hal qilamiz. B2B va B2C uchun alohida yechimlar.</p>
+      </div>
+      <a href="#aloqa" class="btn btn-rust" style="align-self:flex-end"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a>
+    </div>
+    <div class="cat-tabs">
+      <button class="cat-btn active" onclick="showCat('b2b',this)"><span class="cb-icon">🏗</span><span class="cb-text" data-i18n="cat_b2b">Sanoat &amp; Qurilish<br>(B2B)</span></button>
+      <button class="cat-btn" onclick="showCat('b2c',this)"><span class="cb-icon">🚪</span><span class="cb-text" data-i18n="cat_b2c">Arxitektura &amp; Uy<br>(B2C)</span></button>
+      <button class="cat-btn" onclick="showCat('lazer',this)"><span class="cb-icon">⚡</span><span class="cb-text" data-i18n="cat_laser">Lazer Kesish<br>Xizmati</span></button>
+    </div>
+    <div class="cat-panel active" id="cat-b2b">
+      <div class="prod-cards">
+        <div class="prod-card"><div class="prod-card-icon">🔩</div><h3 data-i18n="p_zakl_h">Zakladnoy listlar</h3><p data-i18n="p_zakl_p">4mm dan 12mm gacha qalinlikdagi po'lat listlar va sertifikatlangan armaturalardan tayyorlangan metall tayanchlar. O'lchamlar: 100×100 dan 400×400 mm gacha va chizmangiz asosida.</p><br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a></div>
+        <div class="prod-card"><div class="prod-card-icon">⚙️</div><h3 data-i18n="p_shayb_h">Sanoat shaybalari</h3><p data-i18n="p_shayb_p">DIN va GOST standartlariga javob beradigan, doimiy tebranishlarga chidamli, yuqori aniqlikdagi shtamplangan ulgurji shaybalar. M6 dan M72 gacha barcha o'lchamlar.</p><br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a></div>
+        <div class="prod-card"><div class="prod-card-icon">⚡</div><h3 data-i18n="p_laser_h">Yuqori aniqlikdagi Lazer</h3><p data-i18n="p_laser_p">Qalin temir listlarni 0.1mm gacha aniqlikda, mutloq silliq chiziq bilan kesish xizmati. DXF/DWG formatidagi chizmangizdan to tayyor mahsulotgacha.</p><br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a></div>
+      </div>
+      <div style="margin-top:44px">
+        <div class="lbl" style="margin-bottom:16px" data-i18n="zakl_table_label">Zakladnoy listlar — texnik jadval</div>
+        <div class="tw"><table>
+          <thead><tr><th data-i18n="th_size">O'lcham (mm)</th><th data-i18n="th_thick">Qalinlik</th><th data-i18n="th_arm">Armatura</th><th data-i18n="th_weight">Vazn (kg)</th><th data-i18n="th_use">Qo'llanilishi</th></tr></thead>
+          <tbody>
+            <tr><td><strong>100×100</strong></td><td>4mm</td><td>Ø10×2</td><td>~0.6</td><td data-i18n="zr1">Engil konstruksiya, perila</td></tr>
+            <tr><td><strong>150×150</strong></td><td>5mm</td><td>Ø10×4</td><td>~1.2</td><td data-i18n="zr2">Darvoza, to'siq tayanchlari</td></tr>
+            <tr><td><strong>200×200</strong></td><td>6mm</td><td>Ø12×4</td><td>~2.5</td><td><span data-i18n="zr3">O'rtacha yukli ustunlar</span> <span class="badge-tag" data-i18n="tag_popular">Mashhur</span></td></tr>
+            <tr><td><strong>250×250</strong></td><td>8mm</td><td>Ø14×4</td><td>~5.0</td><td data-i18n="zr4">Sanoat konstruksiyalari</td></tr>
+            <tr><td><strong>300×300</strong></td><td>10mm</td><td>Ø16×6</td><td>~9.4</td><td><span data-i18n="zr5">Og'ir kran yo'laklari</span> <span class="badge-tag" data-i18n="tag_strong">Kuchli</span></td></tr>
+            <tr><td><strong>400×400</strong></td><td>12mm</td><td>Ø16×8</td><td>~17.5</td><td data-i18n="zr6">Ko'prik, industrial ferma</td></tr>
+            <tr><td colspan="5" style="color:var(--rust);font-family:var(--fd);font-size:10px;letter-spacing:2px;text-transform:uppercase" data-i18n="zr_custom">★ Individual o'lchamda ham qabul qilinadi — chizma yuboring</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    <div class="cat-panel" id="cat-b2c">
+      <div class="prod-cards">
+        <div class="prod-card"><div class="prod-card-icon">🚪</div><h3 data-i18n="p_gate_h">Premium Darvozalar</h3><p data-i18n="p_gate_p">Kompyuterda og'irlik balansi hisoblangan, vaqt o'tsa ham yerga tegib qiyshaymaydigan Loft va Modern uslubidagi zamonaviy darvozalar. Pechda bo'yalgan — umrbod zang yo'q.</p><br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a></div>
+        <div class="prod-card"><div class="prod-card-icon">🛡️</div><h3 data-i18n="p_grid_h">Lazerli Reshotkalar</h3><p data-i18n="p_grid_p">Uyingizni qamoqxonaga aylantirmaydigan, quyosh nurini to'smaydigan, lekin mutloq xavfsiz yaxlit po'lat panjaralar. Har qanday naqsh va geometriya lazer bilan kesiladi.</p><br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a></div>
+        <div class="prod-card"><div class="prod-card-icon">🪜</div><h3 data-i18n="p_rail_h">Silliq chokli Perilalar</h3><p data-i18n="p_rail_p">Burchak va ulanish choklari robotlashtirilgan usulda silliqlangan, bolalar qo'lini tirnamaydigan mustahkam zina to'siqlari. Polimer qoplama bilan 25 yillik kafolat.</p><br><a href="#aloqa" class="btn btn-rust" style="font-size:11px;padding:10px 20px"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a></div>
+      </div>
+    </div>
+    <div class="cat-panel" id="cat-lazer">
+      <div class="tab-layout">
+        <div>
+          <p class="prod-desc"><strong data-i18n="laser_d1_b">Zamonaviy lazer kesish</strong> <span data-i18n="laser_d1_t">— qalin temir listlarni kompyuter boshqaruvida, chizmaga qarab, millimetrning o'ndan bir aniqligi bilan kesish. Kesish chizig'i silliq, qirrasi toza — qo'shimcha ishlov talab etmaydi.</span></p>
+          <p class="prod-desc" data-i18n="laser_d2">Biz fasad naqshlari, murakkab geometrik chizmalar, texnologik teshiklar va sanoat plitalarini bir xil aniqlikda kesib beramiz.</p>
+          <div class="prod-sub" data-i18n="laser_sub">Nima kesib beramiz:</div>
+          <ul class="spec-list">
+            <li data-i18n="laser_li1">Zakladnoy listlar uchun tayyor plastinalar (standart va individual)</li>
+            <li data-i18n="laser_li2">Fasad va dekorativ naqshlar (arxitektura loyihalari)</li>
+            <li data-i18n="laser_li3">Sanoat mashinalari uchun korpus va qopqoqlar</li>
+            <li data-i18n="laser_li4">Murakkab geometriyali konstruktiv elementlar</li>
+            <li data-i18n="laser_li5">Reklama va ko'rsatmalar uchun metall taxtachalar</li>
+            <li data-i18n="laser_li6">Elektr shkaf va panel korpuslari</li>
+          </ul>
+          <br><a href="#aloqa" class="btn btn-rust"><span data-i18n="btn_consult">Bepul konsultatsiya olish</span> →</a>
+        </div>
+        <div>
+          <div class="laser-specs">
+            <div class="laser-card"><div class="laser-val">0.1<span>mm</span></div><div class="laser-key" data-i18n="ls_precision">Kesish aniqligi</div></div>
+            <div class="laser-card"><div class="laser-val">25<span>mm</span></div><div class="laser-key" data-i18n="ls_maxthick">Maks. qalinlik</div></div>
+            <div class="laser-card"><div class="laser-val">1500<span>×3000</span></div><div class="laser-key" data-i18n="ls_maxsize">Maks. list o'lchami</div></div>
+            <div class="laser-card"><div class="laser-val">DXF<span>/DWG</span></div><div class="laser-key" data-i18n="ls_format">Qabul qilinadigan format</div></div>
+          </div>
+          <div class="tw"><table>
+            <thead><tr><th data-i18n="th_material">Material</th><th data-i18n="th_maxthick">Maks. qalinlik</th><th data-i18n="th_quality">Sifat</th></tr></thead>
+            <tbody>
+              <tr><td><strong data-i18n="mat1">Yumshoq po'lat (St3)</strong></td><td>25mm</td><td data-i18n="q1">Toza, silliq</td></tr>
+              <tr><td><strong data-i18n="mat2">Zanglamaydigan po'lat</strong></td><td>15mm</td><td data-i18n="q2">Yuqori sifat</td></tr>
+              <tr><td><strong data-i18n="mat3">Alyuminiy</strong></td><td>10mm</td><td data-i18n="q3">Silliq, parlaydigan</td></tr>
+              <tr><td><strong data-i18n="mat4">Mis / Latun</strong></td><td>6mm</td><td data-i18n="q4">Aniq, toza</td></tr>
+              <tr><td><strong data-i18n="mat5">Galvanizatsiyalangan</strong></td><td>12mm</td><td data-i18n="q5">Standart</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="advantages" id="afzalliklar">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl" data-i18n="adv_label">Nega aynan MetalDesign.uz</div>
+      <h2 class="h2" data-i18n="adv_title">Raqobatchilardan <em>farqimiz</em></h2>
+    </div>
+    <div class="adv-grid">
+      <div class="adv-card"><div class="adv-num">01</div><span class="adv-icon">🔥</span><h3 data-i18n="adv1_h">180°C pechda kukunli bo'yash</h3><p data-i18n="adv1_p">Biz mahsulotlarimizni oddiy cho'tkada bo'yamaymiz. Polimer kukun sepilib, maxsus pechda pishiriladi. Bu — zangga qarshi umrbod kafolat degani!</p></div>
+      <div class="adv-card"><div class="adv-num">02</div><span class="adv-icon">💻</span><h3 data-i18n="adv2_h">Dasturiy muhandislik (CAD/CAM)</h3><p data-i18n="adv2_p">Har bir darvoza yoki konstruksiya oldindan kompyuterda chizilib, unga tushadigan shamol, tebranish va og'irlik yuklamalari hisoblab chiqiladi. Xatolik ehtimoli — 0%.</p></div>
+      <div class="adv-card"><div class="adv-num">03</div><span class="adv-icon">🏭</span><h3 data-i18n="adv3_h">To'g'ridan-to'g'ri zavod narxi</h3><p data-i18n="adv3_p">O'rtakashlar va vositachilarsiz, xomashyoni metallurgiya zavodlaridan to'g'ridan-to'g'ri olganimiz sababli bozordagi eng maqbul narxni beramiz.</p></div>
+      <div class="adv-card"><div class="adv-num">04</div><span class="adv-icon">🧹</span><h3 data-i18n="adv4_h">Changsiz va xavfsiz montaj</h3><p data-i18n="adv4_p">Professional guruhimiz uyingiz ta'mirlangan bo'lsa ham, devor va kafellarga ziyon yetkazmasdan, changsiz o'rnatib berishadi. Kafolat bilan.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="jarayon">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl" data-i18n="proc_label">Qanday ishlashimiz</div>
+      <h2 class="h2"><span data-i18n="proc_title_1">5 qadam —</span><br><em data-i18n="proc_title_2">Tayyor</em> <span data-i18n="proc_title_3">mahsulot</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div class="step-icon">📋</div><h3 data-i18n="step1_h">So'rov yuborish</h3><p data-i18n="step1_p">Chizma, o'lcham yoki eskizingizni yuboring. Telefon, Telegram yoki sayt orqali — qaysi qulay.</p></div>
+      <div class="step"><div class="step-num">02</div><div class="step-icon">🔧</div><h3 data-i18n="step2_h">Bepul o'lchov</h3><p data-i18n="step2_p">Mutaxassisimiz ob'ektingizga kelib, bepul o'lchov oladi, dizayn tanlaydi va smeta chiqaradi.</p></div>
+      <div class="step"><div class="step-num">03</div><div class="step-icon">✅</div><h3 data-i18n="step3_h">Kelishuv</h3><p data-i18n="step3_p">Narx va shartlarga rozilik. Shartnoma tuziladi. Avans to'lovdan keyin ishlab chiqarish boshlanadi.</p></div>
+      <div class="step"><div class="step-num">04</div><div class="step-icon">⚙️</div><h3 data-i18n="step4_h">Ishlab chiqarish</h3><p data-i18n="step4_p">Har bir mahsulot GOST asosida, sertifikatlangan uskunalarda. OTK nazorati — 100% tekshiruv.</p></div>
+      <div class="step"><div class="step-num">05</div><div class="step-icon">🚚</div><h3 data-i18n="step5_h">Yetkazish va montaj</h3><p data-i18n="step5_p">Changsiz, xavfsiz o'rnatish. Buyurtma o'lchamiga qarab 24 soatdan. Toshkent shahar va viloyati bo'ylab yetkazib beramiz.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-row reveal">
+    <div class="si"><div class="stat-num" data-target="15">0<span>+</span></div><div class="stat-lbl" data-i18n="st1">Yirik turar-joy majmualari</div></div>
+    <div class="si"><div class="stat-num" data-target="500">0<span>+</span></div><div class="stat-lbl" data-i18n="st2">Mamnun xonadon egalari</div></div>
+    <div class="si"><div class="stat-num">48<span data-i18n="unit_hour">soat</span></div><div class="stat-lbl" data-i18n="st3">Ulgurji buyurtma muddati</div></div>
+    <div class="si"><div class="stat-num">100<span>%</span></div><div class="stat-lbl" data-i18n="st4">OTK sinovidan o'tgan</div></div>
+    <div class="si"><div class="stat-num">0.1<span>mm</span></div><div class="stat-lbl" data-i18n="st5">Ishlab chiqarish aniqligi</div></div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews" id="ishonch">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl" data-i18n="rev_label">Hamkorlarimiz fikri</div>
+      <h2 class="h2" data-i18n="rev_title">Biz haqimizda <em>nima deyishadi?</em></h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text" data-i18n="rev1_t">Golden House majmuasi uchun barcha zakladnoylarni MetalDesign'dan oldik. Har bir detal millimetrigacha aniq, svarkasi baquvvat. Qurilish jarayonida bitta ham qaytarilgan mahsulot bo'lmadi.</p><div class="reviewer"><div class="reviewer-avatar">GH</div><div><div class="reviewer-name" data-i18n="rev1_n">Bosh muhandis</div><div class="reviewer-role">Golden House</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text" data-i18n="rev2_t">Infinity loyihasi uchun katta hajmda zakladnoy va shaybalar kerak edi. MetalDesign 48 soat ichida yetkazib berdi. Narxi ham, sifati ham — raqobatchilarga tengi yo'q.</p><div class="reviewer"><div class="reviewer-avatar">IN</div><div><div class="reviewer-name" data-i18n="rev2_n">Loyiha rahbari</div><div class="reviewer-role">Infinity</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text" data-i18n="rev3_t">Assalom Sohil uchun maxsus o'lchamdagi konstruksiyalar kerak edi. Chizmani yubordik — ikki kunda tayyor. Lazer kesish aniqligi va payvand sifati — oliy darajada.</p><div class="reviewer"><div class="reviewer-avatar">AS</div><div><div class="reviewer-name" data-i18n="rev3_n">Texnik direktor</div><div class="reviewer-role">Assalom Sohil</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text" data-i18n="rev4_t">Assalom Do'stlik ob'ekti uchun yirik ulgurji buyurtma berdik. Muddatga qat'iy rioya qilindi, har bir mahsulot OTK nazoratidan o'tgan. Doimiy hamkorlikni davom ettiramiz.</p><div class="reviewer"><div class="reviewer-avatar">AD</div><div><div class="reviewer-name" data-i18n="rev4_n">Qurilish direktori</div><div class="reviewer-role">Assalom Do'stlik</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl" data-i18n="trust_label">Sifat kafolatlari</div>
+      <h2 class="h2"><span data-i18n="trust_title_1">Siz</span> <em data-i18n="trust_title_2">Ishonch</em> <span data-i18n="trust_title_3">Bilan Buyurtma Bera Olasiz</span></h2>
+    </div>
+    <div class="trust-grid">
+      <div>
+        <p data-i18n="trust_p1">Biz metallurgiya va qurilish sanoatida yillar davomida ishlaymiz. Mijozlarimiz — Toshkent va viloyatlardagi yirik qurilish kompaniyalari, ishlab chiqarish korxonalari va davlat buyurtmachilar.</p>
+        <p data-i18n="trust_p2">Har bir buyurtma bitta mas'ul texnik mutaxassis nazoratida bajariladi. Mahsulot jo'natilishidan oldin OTK sifat nazorati o'tkaziladi va foto-hisobot bilan birga yuboriladi.</p>
+        <ul class="guar-list">
+          <li><span class="check">✓</span> <span data-i18n="guar1">GOST standartlariga to'liq muvofiqlik</span></li>
+          <li><span class="check">✓</span> <span data-i18n="guar2">Har bir mahsulotda sifat pasporti</span></li>
+          <li><span class="check">✓</span> <span data-i18n="guar3">Muddatga rioya kafolati (shartnomada)</span></li>
+          <li><span class="check">✓</span> <span data-i18n="guar4">Qaytarish yoki almashtirish siyosati</span></li>
+          <li><span class="check">✓</span> <span data-i18n="guar5">Ishlab chiqarish jarayoni foto-hisoboti</span></li>
+          <li><span class="check">✓</span> <span data-i18n="guar6">Texnik maslahat — bepul</span></li>
+        </ul>
+      </div>
+      <div class="clients-grid">
+        <div class="client-card"><div class="cli-lbl" data-i18n="cli_complex">Turar-joy majmuasi</div><h4>Golden House</h4><p data-i18n="cli1_p">Barcha zakladnoy va konstruksiyalar yetkazib berildi. Doimiy hamkor.</p></div>
+        <div class="client-card"><div class="cli-lbl" data-i18n="cli_project">Qurilish loyihasi</div><h4>Infinity</h4><p data-i18n="cli2_p">Yirik ulgurji buyurtma — 48 soatda yetkazib berildi. Sifat kafolati bilan.</p></div>
+        <div class="client-card"><div class="cli-lbl" data-i18n="cli_complex">Turar-joy majmuasi</div><h4>Assalom Sohil</h4><p data-i18n="cli3_p">Maxsus o'lchamdagi konstruksiyalar lazer kesish va payvand xizmati.</p></div>
+        <div class="client-card"><div class="cli-lbl" data-i18n="cli_complex">Turar-joy majmuasi</div><h4>Assalom Do'stlik</h4><p data-i18n="cli4_p">OTK nazoratidan o'tgan mahsulotlar. Muddatga qat'iy rioya qilindi.</p></div>
+      </div>
+      <div class="client-card cli-cta" style="margin-top:14px"><div class="cli-lbl" data-i18n="cli_500">500+ loyiha</div><h4 data-i18n="cli_yours">Sizning kompaniyangiz?</h4><p data-i18n="cli_yours_p">Hozir murojaat qiling — birinchi buyurtmaga maxsus narx.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="reveal">
+    <div class="sec-head">
+      <div class="lbl" data-i18n="faq_label">Tez-tez beriladigan savollar</div>
+      <h2 class="h2"><span data-i18n="faq_title_1">Savollaringizga</span><br><em data-i18n="faq_title_2">javoblar</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq1_q">O'lchash va smeta hisoblash pullikmi?</span><div class="faq-icon">+</div></div><div class="faq-a"><p data-i18n="faq1_a">Yo'q, mutaxassisimiz uyingizga yoki qurilish ob'ektiga borib o'lchash, dizayn tanlash va smeta chiqarib berish xizmatini mutloq BEPUL amalga oshiradi. Hech qanday majburiyat yo'q.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq2_q">Viloyatlarga ham yetkazib berish bormi?</span><div class="faq-icon">+</div></div><div class="faq-a"><p data-i18n="faq2_a">Hozirda yetkazib berish xizmati faqat Toshkent shahri va Toshkent viloyati bo'ylab amalga oshiriladi. Boshqa hududlardagi mijozlar mahsulotni o'zlari olib ketishlari mumkin.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq3_q">Chizmalarimiz asosida individual buyurtma qilsak bo'ladimi?</span><div class="faq-icon">+</div></div><div class="faq-a"><p data-i18n="faq3_a">Albatta! Muhandislarimiz siz taqdim etgan har qanday AutoCAD, SolidWorks chizmalari yoki oddiy eskizlar asosida lazerda aniq kesib berishadi. Chizmangizni Telegram orqali yuboring.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq4_q">Standart buyurtma uchun qancha vaqt ketadi?</span><div class="faq-icon">+</div></div><div class="faq-a"><p data-i18n="faq4_a">Buyurtma muddati mahsulot o'lchamiga qarab farq qiladi — 24 soatdan boshlanadi. Murakkab yoki katta hajmli loyihalar uchun muddat oldindan kelishiladi va qat'iy amal qilinadi.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq5_q">Pechda bo'yash va galvanizatsiya qanday farq qiladi?</span><div class="faq-icon">+</div></div><div class="faq-a"><p data-i18n="faq5_a">Pechda kukunli bo'yash — polimer qoplama bo'lib, estetik ko'rinish va zangga qarshi 10-15 yillik himoya beradi. Galvanizatsiya esa rux qoplama bo'lib, ko'proq sanoat va tashqi muhit uchun 25+ yillik eng kuchli himoya hisoblanadi.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span data-i18n="faq6_q">To'lov qanday amalga oshiriladi?</span><div class="faq-icon">+</div></div><div class="faq-a"><p data-i18n="faq6_a">To'lov uch usulda qabul qilinadi: naqd pul, perechesleniya (bank o'tkazmasi) va kartadan kartaga pul o'tkazish orqali. Avans to'lovdan so'ng ishlab chiqarish boshlanadi.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="aloqa">
+  <div class="cta-inner">
+    <div>
+      <div class="cta-title" data-i18n="cta_title">Metall borasida tavakkal qilmang, professionallarga ishoning!</div>
+      <p class="cta-sub" data-i18n="cta_sub">Ma'lumotlaringizni qoldiring. Muhandisimiz siz bilan 15 daqiqa ichida bog'lanib, loyihangiz uchun bepul 3D model va smetani tayyorlab beradi.</p>
+    </div>
+    <form class="cta-form" onsubmit="handleSubmit(event)">
+      <input class="cta-input" type="text" data-i18n-ph="ph_name" placeholder="Ismingizni kiriting" required>
+      <input class="cta-input" type="tel" placeholder="+998 __ ___ __ __" required>
+      <input class="cta-input" type="text" data-i18n-ph="ph_company" placeholder="Kompaniya nomi (ixtiyoriy)">
+      <select class="cta-input">
+        <option value="" disabled selected data-i18n="ph_service">Qiziqtirgan xizmat</option>
+        <option data-i18n="opt1">Zakladnoy listlar (B2B)</option>
+        <option data-i18n="opt2">Sanoat shaybalari (B2B)</option>
+        <option data-i18n="opt3">Premium darvozalar (B2C)</option>
+        <option data-i18n="opt4">Lazerli panjaralar (B2C)</option>
+        <option data-i18n="opt5">Perilalar (B2C)</option>
+        <option data-i18n="opt6">Lazer kesish xizmati</option>
+        <option data-i18n="opt7">Bir necha xizmat</option>
+      </select>
+      <button type="submit" class="btn btn-white" id="submitBtn" data-i18n="btn_submit">BEPUL KONSULTATSIYA OLISH →</button>
+      <div class="cta-note">
+        <span data-i18n="cta_or">yoki Telegram:</span> <a href="https://t.me/metal_design_uz">@metal_design_uz</a><br>
+        📞 <a href="tel:+998991501111">+998 99 150-11-11</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="f-logo">Metal<em>Design</em>.uz</span>
+      <p class="f-desc" data-i18n="f_desc">Metallni qayta ishlash, lazer kesish va sanoat detallar ishlab chiqarish. Toshkent, O'zbekiston.</p>
+    </div>
+    <div class="f-col">
+      <h5 data-i18n="f_products">Mahsulotlar</h5>
+      <ul>
+        <li><a href="#mahsulotlar" data-i18n="p_zakl_h">Zakladnoy listlar</a></li>
+        <li><a href="#mahsulotlar" data-i18n="p_shayb_h">Sanoat shaybalari</a></li>
+        <li><a href="#mahsulotlar" data-i18n="p_gate_h">Premium darvozalar</a></li>
+        <li><a href="#mahsulotlar" data-i18n="p_grid_h">Lazerli panjaralar</a></li>
+        <li><a href="#mahsulotlar" data-i18n="p_rail_h">Silliq chokli perilalar</a></li>
+        <li><a href="#mahsulotlar" data-i18n="f_laser">Lazer kesish</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5 data-i18n="f_company">Kompaniya</h5>
+      <ul>
+        <li><a href="#" data-i18n="f_about">Biz haqimizda</a></li>
+        <li><a href="#" data-i18n="f_quality">Sifat nazorati</a></li>
+        <li><a href="#" data-i18n="f_certs">Sertifikatlar</a></li>
+        <li><a href="#" data-i18n="f_projects">Loyihalar</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5 data-i18n="f_contact">Aloqa</h5>
+      <div class="f-contact">📍 <span data-i18n="f_address">Toshkent shahri, Yunusobod tumani, Nazarbek Tapovich ko'chasi</span></div>
+      <div class="f-contact">📞 <span><strong><a href="tel:+998991501111" style="color:var(--white)">+998 99 150-11-11</a></strong></span></div>
+      <div class="f-contact">🕐 <span data-i18n="f_hours">Dushanba–Shanba: 09:00–18:00<br>Yakshanba — dam olish</span></div>
+      <div class="f-contact">💬 <span><a href="https://t.me/metal_design_uz" style="color:var(--rust-bright)">@metal_design_uz</a></span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-i18n="f_rights">© 2025 MetalDesign.uz — Barcha huquqlar himoyalangan</span>
+    <span><a href="#" data-i18n="f_privacy">Maxfiylik siyosati</a> · <a href="#" data-i18n="f_terms">Shartnoma shartlari</a></span>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+// I18N TRANSLATIONS
+// ═══════════════════════════════════════
+const I18N = {
+  uz: {
+    nav_problem:"Muammo", nav_products:"Mahsulotlar", nav_advantages:"Afzalliklar", nav_process:"Jarayon", nav_trust:"Ishonch", nav_cta:"Bepul konsultatsiya olish",
+    hero_badge:"Toshkent · O'zbekiston · B2B & B2C Ishlab chiqarish",
+    hero_h1_1:"Poydevordan", hero_h1_2:"Darvozagacha", hero_h1_3:"Millimetr Aniqlik",
+    hero_sub:"O'zbekistondagi yirik qurilish kompaniyalari va shinam xonadonlar uchun og'ir sanoat standartidagi zakladnoy, shayba, darvoza, perila va lazer xizmati — to'g'ridan-to'g'ri zavodning o'zidan!",
+    btn_consult:"Bepul konsultatsiya olish",
+    hero_stat1:"Mamnun mijozlar", hero_stat2:"Lazer aniqligi", hero_stat3:"Standart muddat", unit_hour:"soat",
+    prob_label:"Nega ko'p loyihalar muvaffaqiyatsizlikka uchraydi",
+    prob_title:"Metall borasidagi xatolar <em>qanchaga tushishini</em> bilasizmi?",
+    prob1_h:"Sifatsiz svarka va yupqa listlar", prob1_p:"Sifatsiz ustalar tomonidan qilingan zakladnoy yoki darvozalar yuklamani ko'tarmay egiladi, vaqt o'tib sinadi yoki poydevordan sug'urilib chiqadi. Bu — ko'rinmas, lekin halokatli nuqson.",
+    prob2_h:"Doimiy zanglash muammosi", prob2_p:"Oddiy bo'yoq bilan bo'yalgan ko'cha eshiklari, panjara va perilalar birinchi qishdayoq zanglab, uy fassadini rasvo qiladi. Har yili qayta bo'yash esa qo'shimcha xarajat.",
+    prob3_h:"Qiyshiq o'lcham va vaqt yo'qotish", prob3_p:"Eski uslubda, bolgarkada qo'lda kesilgan detallar montaj paytida bir-biriga tushmaydi. Qurilish vaqti cho'ziladi, pulingiz havoga uchadi. 0.1mm aniqlik — bu bizning standartimiz.",
+    prod_label:"Mahsulotlar katalogi",
+    prod_title:"Har qanday murakkablikdagi metall muammolarga <em>yagona yechim</em>",
+    prod_intro:"Chizmangizni yuboring — qolgan hamma narsani biz hal qilamiz. B2B va B2C uchun alohida yechimlar.",
+    cat_b2b:"Sanoat & Qurilish<br>(B2B)", cat_b2c:"Arxitektura & Uy<br>(B2C)", cat_laser:"Lazer Kesish<br>Xizmati",
+    p_zakl_h:"Zakladnoy listlar", p_zakl_p:"4mm dan 12mm gacha qalinlikdagi po'lat listlar va sertifikatlangan armaturalardan tayyorlangan metall tayanchlar. O'lchamlar: 100×100 dan 400×400 mm gacha va chizmangiz asosida.",
+    p_shayb_h:"Sanoat shaybalari", p_shayb_p:"DIN va GOST standartlariga javob beradigan, doimiy tebranishlarga chidamli, yuqori aniqlikdagi shtamplangan ulgurji shaybalar. M6 dan M72 gacha barcha o'lchamlar.",
+    p_laser_h:"Yuqori aniqlikdagi Lazer", p_laser_p:"Qalin temir listlarni 0.1mm gacha aniqlikda, mutloq silliq chiziq bilan kesish xizmati. DXF/DWG formatidagi chizmangizdan to tayyor mahsulotgacha.",
+    zakl_table_label:"Zakladnoy listlar — texnik jadval",
+    th_size:"O'lcham (mm)", th_thick:"Qalinlik", th_arm:"Armatura", th_weight:"Vazn (kg)", th_use:"Qo'llanilishi",
+    zr1:"Engil konstruksiya, perila", zr2:"Darvoza, to'siq tayanchlari", zr3:"O'rtacha yukli ustunlar", zr4:"Sanoat konstruksiyalari", zr5:"Og'ir kran yo'laklari", zr6:"Ko'prik, industrial ferma",
+    tag_popular:"Mashhur", tag_strong:"Kuchli", zr_custom:"★ Individual o'lchamda ham qabul qilinadi — chizma yuboring",
+    p_gate_h:"Premium Darvozalar", p_gate_p:"Kompyuterda og'irlik balansi hisoblangan, vaqt o'tsa ham yerga tegib qiyshaymaydigan Loft va Modern uslubidagi zamonaviy darvozalar. Pechda bo'yalgan — umrbod zang yo'q.",
+    p_grid_h:"Lazerli Reshotkalar", p_grid_p:"Uyingizni qamoqxonaga aylantirmaydigan, quyosh nurini to'smaydigan, lekin mutloq xavfsiz yaxlit po'lat panjaralar. Har qanday naqsh va geometriya lazer bilan kesiladi.",
+    p_rail_h:"Silliq chokli Perilalar", p_rail_p:"Burchak va ulanish choklari robotlashtirilgan usulda silliqlangan, bolalar qo'lini tirnamaydigan mustahkam zina to'siqlari. Polimer qoplama bilan 25 yillik kafolat.",
+    laser_d1_b:"Zamonaviy lazer kesish", laser_d1_t:"— qalin temir listlarni kompyuter boshqaruvida, chizmaga qarab, millimetrning o'ndan bir aniqligi bilan kesish. Kesish chizig'i silliq, qirrasi toza — qo'shimcha ishlov talab etmaydi.",
+    laser_d2:"Biz fasad naqshlari, murakkab geometrik chizmalar, texnologik teshiklar va sanoat plitalarini bir xil aniqlikda kesib beramiz.",
+    laser_sub:"Nima kesib beramiz:",
+    laser_li1:"Zakladnoy listlar uchun tayyor plastinalar (standart va individual)", laser_li2:"Fasad va dekorativ naqshlar (arxitektura loyihalari)", laser_li3:"Sanoat mashinalari uchun korpus va qopqoqlar", laser_li4:"Murakkab geometriyali konstruktiv elementlar", laser_li5:"Reklama va ko'rsatmalar uchun metall taxtachalar", laser_li6:"Elektr shkaf va panel korpuslari",
+    ls_precision:"Kesish aniqligi", ls_maxthick:"Maks. qalinlik", ls_maxsize:"Maks. list o'lchami", ls_format:"Qabul qilinadigan format",
+    th_material:"Material", th_maxthick:"Maks. qalinlik", th_quality:"Sifat",
+    mat1:"Yumshoq po'lat (St3)", mat2:"Zanglamaydigan po'lat", mat3:"Alyuminiy", mat4:"Mis / Latun", mat5:"Galvanizatsiyalangan",
+    q1:"Toza, silliq", q2:"Yuqori sifat", q3:"Silliq, parlaydigan", q4:"Aniq, toza", q5:"Standart",
+    adv_label:"Nega aynan MetalDesign.uz", adv_title:"Raqobatchilardan <em>farqimiz</em>",
+    adv1_h:"180°C pechda kukunli bo'yash", adv1_p:"Biz mahsulotlarimizni oddiy cho'tkada bo'yamaymiz. Polimer kukun sepilib, maxsus pechda pishiriladi. Bu — zangga qarshi umrbod kafolat degani!",
+    adv2_h:"Dasturiy muhandislik (CAD/CAM)", adv2_p:"Har bir darvoza yoki konstruksiya oldindan kompyuterda chizilib, unga tushadigan shamol, tebranish va og'irlik yuklamalari hisoblab chiqiladi. Xatolik ehtimoli — 0%.",
+    adv3_h:"To'g'ridan-to'g'ri zavod narxi", adv3_p:"O'rtakashlar va vositachilarsiz, xomashyoni metallurgiya zavodlaridan to'g'ridan-to'g'ri olganimiz sababli bozordagi eng maqbul narxni beramiz.",
+    adv4_h:"Changsiz va xavfsiz montaj", adv4_p:"Professional guruhimiz uyingiz ta'mirlangan bo'lsa ham, devor va kafellarga ziyon yetkazmasdan, changsiz o'rnatib berishadi. Kafolat bilan.",
+    proc_label:"Qanday ishlashimiz", proc_title_1:"5 qadam —", proc_title_2:"Tayyor", proc_title_3:"mahsulot",
+    step1_h:"So'rov yuborish", step1_p:"Chizma, o'lcham yoki eskizingizni yuboring. Telefon, Telegram yoki sayt orqali — qaysi qulay.",
+    step2_h:"Bepul o'lchov", step2_p:"Mutaxassisimiz ob'ektingizga kelib, bepul o'lchov oladi, dizayn tanlaydi va smeta chiqaradi.",
+    step3_h:"Kelishuv", step3_p:"Narx va shartlarga rozilik. Shartnoma tuziladi. Avans to'lovdan keyin ishlab chiqarish boshlanadi.",
+    step4_h:"Ishlab chiqarish", step4_p:"Har bir mahsulot GOST asosida, sertifikatlangan uskunalarda. OTK nazorati — 100% tekshiruv.",
+    step5_h:"Yetkazish va montaj", step5_p:"Changsiz, xavfsiz o'rnatish. Buyurtma o'lchamiga qarab 24 soatdan. Toshkent shahar va viloyati bo'ylab yetkazib beramiz.",
+    st1:"Yirik turar-joy majmualari", st2:"Mamnun xonadon egalari", st3:"Ulgurji buyurtma muddati", st4:"OTK sinovidan o'tgan", st5:"Ishlab chiqarish aniqligi",
+    rev_label:"Hamkorlarimiz fikri", rev_title:"Biz haqimizda <em>nima deyishadi?</em>",
+    rev1_t:"Golden House majmuasi uchun barcha zakladnoylarni MetalDesign'dan oldik. Har bir detal millimetrigacha aniq, svarkasi baquvvat. Qurilish jarayonida bitta ham qaytarilgan mahsulot bo'lmadi.", rev1_n:"Bosh muhandis",
+    rev2_t:"Infinity loyihasi uchun katta hajmda zakladnoy va shaybalar kerak edi. MetalDesign 48 soat ichida yetkazib berdi. Narxi ham, sifati ham — raqobatchilarga tengi yo'q.", rev2_n:"Loyiha rahbari",
+    rev3_t:"Assalom Sohil uchun maxsus o'lchamdagi konstruksiyalar kerak edi. Chizmani yubordik — ikki kunda tayyor. Lazer kesish aniqligi va payvand sifati — oliy darajada.", rev3_n:"Texnik direktor",
+    rev4_t:"Assalom Do'stlik ob'ekti uchun yirik ulgurji buyurtma berdik. Muddatga qat'iy rioya qilindi, har bir mahsulot OTK nazoratidan o'tgan. Doimiy hamkorlikni davom ettiramiz.", rev4_n:"Qurilish direktori",
+    trust_label:"Sifat kafolatlari", trust_title_1:"Siz", trust_title_2:"Ishonch", trust_title_3:"Bilan Buyurtma Bera Olasiz",
+    trust_p1:"Biz metallurgiya va qurilish sanoatida yillar davomida ishlaymiz. Mijozlarimiz — Toshkent va viloyatlardagi yirik qurilish kompaniyalari, ishlab chiqarish korxonalari va davlat buyurtmachilar.",
+    trust_p2:"Har bir buyurtma bitta mas'ul texnik mutaxassis nazoratida bajariladi. Mahsulot jo'natilishidan oldin OTK sifat nazorati o'tkaziladi va foto-hisobot bilan birga yuboriladi.",
+    guar1:"GOST standartlariga to'liq muvofiqlik", guar2:"Har bir mahsulotda sifat pasporti", guar3:"Muddatga rioya kafolati (shartnomada)", guar4:"Qaytarish yoki almashtirish siyosati", guar5:"Ishlab chiqarish jarayoni foto-hisoboti", guar6:"Texnik maslahat — bepul",
+    cli_complex:"Turar-joy majmuasi", cli_project:"Qurilish loyihasi",
+    cli1_p:"Barcha zakladnoy va konstruksiyalar yetkazib berildi. Doimiy hamkor.", cli2_p:"Yirik ulgurji buyurtma — 48 soatda yetkazib berildi. Sifat kafolati bilan.", cli3_p:"Maxsus o'lchamdagi konstruksiyalar lazer kesish va payvand xizmati.", cli4_p:"OTK nazoratidan o'tgan mahsulotlar. Muddatga qat'iy rioya qilindi.",
+    cli_500:"500+ loyiha", cli_yours:"Sizning kompaniyangiz?", cli_yours_p:"Hozir murojaat qiling — birinchi buyurtmaga maxsus narx.",
+    faq_label:"Tez-tez beriladigan savollar", faq_title_1:"Savollaringizga", faq_title_2:"javoblar",
+    faq1_q:"O'lchash va smeta hisoblash pullikmi?", faq1_a:"Yo'q, mutaxassisimiz uyingizga yoki qurilish ob'ektiga borib o'lchash, dizayn tanlash va smeta chiqarib berish xizmatini mutloq BEPUL amalga oshiradi. Hech qanday majburiyat yo'q.",
+    faq2_q:"Viloyatlarga ham yetkazib berish bormi?", faq2_a:"Hozirda yetkazib berish xizmati faqat Toshkent shahri va Toshkent viloyati bo'ylab amalga oshiriladi. Boshqa hududlardagi mijozlar mahsulotni o'zlari olib ketishlari mumkin.",
+    faq3_q:"Chizmalarimiz asosida individual buyurtma qilsak bo'ladimi?", faq3_a:"Albatta! Muhandislarimiz siz taqdim etgan har qanday AutoCAD, SolidWorks chizmalari yoki oddiy eskizlar asosida lazerda aniq kesib berishadi. Chizmangizni Telegram orqali yuboring.",
+    faq4_q:"Standart buyurtma uchun qancha vaqt ketadi?", faq4_a:"Buyurtma muddati mahsulot o'lchamiga qarab farq qiladi — 24 soatdan boshlanadi. Murakkab yoki katta hajmli loyihalar uchun muddat oldindan kelishiladi va qat'iy amal qilinadi.",
+    faq5_q:"Pechda bo'yash va galvanizatsiya qanday farq qiladi?", faq5_a:"Pechda kukunli bo'yash — polimer qoplama bo'lib, estetik ko'rinish va zangga qarshi 10-15 yillik himoya beradi. Galvanizatsiya esa rux qoplama bo'lib, ko'proq sanoat va tashqi muhit uchun 25+ yillik eng kuchli himoya hisoblanadi.",
+    faq6_q:"To'lov qanday amalga oshiriladi?", faq6_a:"To'lov uch usulda qabul qilinadi: naqd pul, perechesleniya (bank o'tkazmasi) va kartadan kartaga pul o'tkazish orqali. Avans to'lovdan so'ng ishlab chiqarish boshlanadi.",
+    cta_title:"Metall borasida tavakkal qilmang, professionallarga ishoning!",
+    cta_sub:"Ma'lumotlaringizni qoldiring. Muhandisimiz siz bilan 15 daqiqa ichida bog'lanib, loyihangiz uchun bepul 3D model va smetani tayyorlab beradi.",
+    ph_name:"Ismingizni kiriting", ph_company:"Kompaniya nomi (ixtiyoriy)", ph_service:"Qiziqtirgan xizmat",
+    opt1:"Zakladnoy listlar (B2B)", opt2:"Sanoat shaybalari (B2B)", opt3:"Premium darvozalar (B2C)", opt4:"Lazerli panjaralar (B2C)", opt5:"Perilalar (B2C)", opt6:"Lazer kesish xizmati", opt7:"Bir necha xizmat",
+    btn_submit:"BEPUL KONSULTATSIYA OLISH →", cta_or:"yoki Telegram:",
+    f_desc:"Metallni qayta ishlash, lazer kesish va sanoat detallar ishlab chiqarish. Toshkent, O'zbekiston.",
+    f_products:"Mahsulotlar", f_laser:"Lazer kesish", f_company:"Kompaniya", f_about:"Biz haqimizda", f_quality:"Sifat nazorati", f_certs:"Sertifikatlar", f_projects:"Loyihalar",
+    f_contact:"Aloqa", f_address:"Toshkent shahri, Yunusobod tumani, Nazarbek Tapovich ko'chasi", f_hours:"Dushanba–Shanba: 09:00–18:00<br>Yakshanba — dam olish",
+    f_rights:"© 2025 MetalDesign.uz — Barcha huquqlar himoyalangan", f_privacy:"Maxfiylik siyosati", f_terms:"Shartnoma shartlari",
+    ticker:["Zakladnoy listlar","Sanoat shaybalari","Lazer kesish","Premium darvozalar","Lazerli panjaralar","Silliq chokli perilalar","Galvanizatsiya","GOST standartlari","Ulgurji buyurtma"]
+  },
+  ru: {
+    nav_problem:"Проблема", nav_products:"Продукция", nav_advantages:"Преимущества", nav_process:"Процесс", nav_trust:"Доверие", nav_cta:"Бесплатная консультация",
+    hero_badge:"Ташкент · Узбекистан · Производство B2B & B2C",
+    hero_h1_1:"От фундамента", hero_h1_2:"До ворот", hero_h1_3:"Точность до миллиметра",
+    hero_sub:"Закладные, шайбы, ворота, перила и лазерная резка промышленного стандарта для крупных строительных компаний и уютных домов Узбекистана — напрямую с завода!",
+    btn_consult:"Бесплатная консультация",
+    hero_stat1:"Довольных клиентов", hero_stat2:"Точность лазера", hero_stat3:"Стандартный срок", unit_hour:"час",
+    prob_label:"Почему многие проекты терпят неудачу",
+    prob_title:"Знаете ли вы, во что обходятся <em>ошибки с металлом?</em>",
+    prob1_h:"Плохая сварка и тонкие листы", prob1_p:"Закладные или ворота, сделанные некачественными мастерами, гнутся под нагрузкой, со временем ломаются или вырываются из фундамента. Это — невидимый, но катастрофический дефект.",
+    prob2_h:"Постоянная проблема ржавчины", prob2_p:"Уличные двери, решётки и перила, покрашенные обычной краской, ржавеют уже в первую зиму, портя фасад дома. А ежегодная перекраска — это дополнительные расходы.",
+    prob3_h:"Кривые размеры и потеря времени", prob3_p:"Детали, нарезанные вручную болгаркой по старинке, не стыкуются при монтаже. Сроки строительства затягиваются, деньги улетают на ветер. Точность 0.1мм — это наш стандарт.",
+    prod_label:"Каталог продукции",
+    prod_title:"Единое решение для металлических задач <em>любой сложности</em>",
+    prod_intro:"Пришлите ваш чертёж — всё остальное мы решим. Отдельные решения для B2B и B2C.",
+    cat_b2b:"Промышленность<br>(B2B)", cat_b2c:"Архитектура и Дом<br>(B2C)", cat_laser:"Лазерная<br>резка",
+    p_zakl_h:"Закладные листы", p_zakl_p:"Металлические опоры из стальных листов толщиной от 4 до 12 мм и сертифицированной арматуры. Размеры: от 100×100 до 400×400 мм и по вашему чертежу.",
+    p_shayb_h:"Промышленные шайбы", p_shayb_p:"Высокоточные штампованные оптовые шайбы, соответствующие стандартам DIN и ГОСТ, устойчивые к постоянным вибрациям. Все размеры от M6 до M72.",
+    p_laser_h:"Высокоточный лазер", p_laser_p:"Резка толстых металлических листов с точностью до 0.1 мм абсолютно гладкой линией. От вашего чертежа в формате DXF/DWG до готового изделия.",
+    zakl_table_label:"Закладные листы — техническая таблица",
+    th_size:"Размер (мм)", th_thick:"Толщина", th_arm:"Арматура", th_weight:"Вес (кг)", th_use:"Применение",
+    zr1:"Лёгкие конструкции, перила", zr2:"Ворота, опоры ограждений", zr3:"Колонны средней нагрузки", zr4:"Промышленные конструкции", zr5:"Тяжёлые крановые пути", zr6:"Мосты, промышленные фермы",
+    tag_popular:"Популярный", tag_strong:"Прочный", zr_custom:"★ Принимаем заказы и по индивидуальным размерам — пришлите чертёж",
+    p_gate_h:"Премиум Ворота", p_gate_p:"Современные ворота в стиле Лофт и Модерн с рассчитанным на компьютере балансом веса, которые со временем не провисают и не перекашиваются. Покраска в печи — ржавчины не будет никогда.",
+    p_grid_h:"Лазерные решётки", p_grid_p:"Цельные стальные решётки, которые не превращают дом в тюрьму, не загораживают солнечный свет, но абсолютно безопасны. Любой узор и геометрия режутся лазером.",
+    p_rail_h:"Перила с гладким швом", p_rail_p:"Прочные лестничные ограждения с роботизированной шлифовкой угловых и соединительных швов, не царапающие детские руки. 25 лет гарантии с полимерным покрытием.",
+    laser_d1_b:"Современная лазерная резка", laser_d1_t:"— резка толстых металлических листов под компьютерным управлением, по чертежу, с точностью до десятой доли миллиметра. Линия реза гладкая, край чистый — не требует дополнительной обработки.",
+    laser_d2:"Мы режем фасадные узоры, сложные геометрические чертежи, технологические отверстия и промышленные плиты с одинаковой точностью.",
+    laser_sub:"Что мы режем:",
+    laser_li1:"Готовые пластины для закладных листов (стандарт и индивидуальные)", laser_li2:"Фасадные и декоративные узоры (архитектурные проекты)", laser_li3:"Корпуса и крышки для промышленных машин", laser_li4:"Конструктивные элементы сложной геометрии", laser_li5:"Металлические таблички для рекламы и указателей", laser_li6:"Корпуса электрошкафов и панелей",
+    ls_precision:"Точность резки", ls_maxthick:"Макс. толщина", ls_maxsize:"Макс. размер листа", ls_format:"Принимаемый формат",
+    th_material:"Материал", th_maxthick:"Макс. толщина", th_quality:"Качество",
+    mat1:"Мягкая сталь (St3)", mat2:"Нержавеющая сталь", mat3:"Алюминий", mat4:"Медь / Латунь", mat5:"Оцинкованная",
+    q1:"Чисто, гладко", q2:"Высокое качество", q3:"Гладкий, блестящий", q4:"Точно, чисто", q5:"Стандарт",
+    adv_label:"Почему именно MetalDesign.uz", adv_title:"Наше <em>отличие</em> от конкурентов",
+    adv1_h:"Порошковая покраска в печи 180°C", adv1_p:"Мы не красим нашу продукцию обычной кистью. Полимерный порошок напыляется и запекается в специальной печи. Это означает пожизненную гарантию от ржавчины!",
+    adv2_h:"Программная инженерия (CAD/CAM)", adv2_p:"Каждые ворота или конструкция предварительно проектируются на компьютере, рассчитываются ветровые, вибрационные и весовые нагрузки. Вероятность ошибки — 0%.",
+    adv3_h:"Прямая заводская цена", adv3_p:"Без посредников и перекупщиков — так как сырьё мы берём напрямую с металлургических заводов, мы предлагаем самую выгодную цену на рынке.",
+    adv4_h:"Чистый и безопасный монтаж", adv4_p:"Наша профессиональная команда установит всё без пыли, не повредив стены и плитку, даже если в вашем доме сделан ремонт. С гарантией.",
+    proc_label:"Как мы работаем", proc_title_1:"5 шагов —", proc_title_2:"Готовое", proc_title_3:"изделие",
+    step1_h:"Отправка заявки", step1_p:"Пришлите чертёж, размеры или эскиз. По телефону, Telegram или через сайт — как удобно.",
+    step2_h:"Бесплатный замер", step2_p:"Наш специалист приедет на ваш объект, бесплатно произведёт замер, подберёт дизайн и составит смету.",
+    step3_h:"Согласование", step3_p:"Согласие с ценой и условиями. Заключается договор. После предоплаты начинается производство.",
+    step4_h:"Производство", step4_p:"Каждое изделие по ГОСТу, на сертифицированном оборудовании. Контроль ОТК — 100% проверка.",
+    step5_h:"Доставка и монтаж", step5_p:"Чистая, безопасная установка. От 24 часов в зависимости от размера заказа. Доставляем по городу и области Ташкент.",
+    st1:"Крупных жилых комплексов", st2:"Довольных домовладельцев", st3:"Срок оптового заказа", st4:"Прошли контроль ОТК", st5:"Точность производства",
+    rev_label:"Отзывы наших партнёров", rev_title:"Что говорят <em>о нас?</em>",
+    rev1_t:"Для комплекса Golden House все закладные брали в MetalDesign. Каждая деталь точна до миллиметра, сварка прочная. За весь процесс строительства не было ни одного возврата.", rev1_n:"Главный инженер",
+    rev2_t:"Для проекта Infinity требовался большой объём закладных и шайб. MetalDesign доставил в течение 48 часов. И цена, и качество — конкурентам не сравниться.", rev2_n:"Руководитель проекта",
+    rev3_t:"Для Assalom Sohil нужны были конструкции нестандартного размера. Прислали чертёж — готово за два дня. Точность лазерной резки и качество сварки — на высшем уровне.", rev3_n:"Технический директор",
+    rev4_t:"Для объекта Assalom Do'stlik сделали крупный оптовый заказ. Сроки строго соблюдены, каждое изделие прошло контроль ОТК. Продолжаем постоянное сотрудничество.", rev4_n:"Директор по строительству",
+    trust_label:"Гарантии качества", trust_title_1:"Вы можете заказать", trust_title_2:"С доверием", trust_title_3:"и уверенностью",
+    trust_p1:"Мы много лет работаем в металлургической и строительной отрасли. Наши клиенты — крупные строительные компании, производственные предприятия и государственные заказчики Ташкента и областей.",
+    trust_p2:"Каждый заказ выполняется под контролем одного ответственного технического специалиста. Перед отправкой продукция проходит контроль качества ОТК и отправляется вместе с фотоотчётом.",
+    guar1:"Полное соответствие стандартам ГОСТ", guar2:"Паспорт качества на каждое изделие", guar3:"Гарантия соблюдения сроков (в договоре)", guar4:"Политика возврата или обмена", guar5:"Фотоотчёт о процессе производства", guar6:"Техническая консультация — бесплатно",
+    cli_complex:"Жилой комплекс", cli_project:"Строительный проект",
+    cli1_p:"Все закладные и конструкции доставлены. Постоянный партнёр.", cli2_p:"Крупный оптовый заказ — доставлен за 48 часов. С гарантией качества.", cli3_p:"Конструкции нестандартного размера, лазерная резка и сварка.", cli4_p:"Продукция прошла контроль ОТК. Сроки строго соблюдены.",
+    cli_500:"500+ проектов", cli_yours:"Ваша компания?", cli_yours_p:"Обратитесь сейчас — специальная цена на первый заказ.",
+    faq_label:"Часто задаваемые вопросы", faq_title_1:"Ответы на ваши", faq_title_2:"вопросы",
+    faq1_q:"Замер и составление сметы платные?", faq1_a:"Нет, наш специалист приедет к вам домой или на строительный объект и совершенно БЕСПЛАТНО произведёт замер, подбор дизайна и составление сметы. Без каких-либо обязательств.",
+    faq2_q:"Есть ли доставка в области?", faq2_a:"В настоящее время услуга доставки осуществляется только по городу Ташкент и Ташкентской области. Клиенты из других регионов могут забрать продукцию самостоятельно.",
+    faq3_q:"Можно ли заказать по нашим чертежам?", faq3_a:"Конечно! Наши инженеры точно вырежут лазером по любым предоставленным вами чертежам AutoCAD, SolidWorks или простым эскизам. Пришлите ваш чертёж через Telegram.",
+    faq4_q:"Сколько времени занимает стандартный заказ?", faq4_a:"Срок заказа варьируется в зависимости от размера изделия — начинается от 24 часов. Для сложных или крупных проектов срок согласовывается заранее и строго соблюдается.",
+    faq5_q:"Чем отличается покраска в печи от оцинковки?", faq5_a:"Порошковая покраска в печи — это полимерное покрытие, дающее эстетичный вид и защиту от ржавчины на 10-15 лет. Оцинковка же — это цинковое покрытие, обеспечивающее самую сильную защиту на 25+ лет, в основном для промышленности и наружной среды.",
+    faq6_q:"Как осуществляется оплата?", faq6_a:"Оплата принимается тремя способами: наличными, перечислением (банковский перевод) и переводом с карты на карту. После предоплаты начинается производство.",
+    cta_title:"Не рискуйте с металлом, доверьтесь профессионалам!",
+    cta_sub:"Оставьте свои данные. Наш инженер свяжется с вами в течение 15 минут и подготовит бесплатную 3D-модель и смету для вашего проекта.",
+    ph_name:"Введите ваше имя", ph_company:"Название компании (необязательно)", ph_service:"Интересующая услуга",
+    opt1:"Закладные листы (B2B)", opt2:"Промышленные шайбы (B2B)", opt3:"Премиум ворота (B2C)", opt4:"Лазерные решётки (B2C)", opt5:"Перила (B2C)", opt6:"Лазерная резка", opt7:"Несколько услуг",
+    btn_submit:"ПОЛУЧИТЬ БЕСПЛАТНУЮ КОНСУЛЬТАЦИЮ →", cta_or:"или Telegram:",
+    f_desc:"Металлообработка, лазерная резка и производство промышленных деталей. Ташкент, Узбекистан.",
+    f_products:"Продукция", f_laser:"Лазерная резка", f_company:"Компания", f_about:"О нас", f_quality:"Контроль качества", f_certs:"Сертификаты", f_projects:"Проекты",
+    f_contact:"Контакты", f_address:"г. Ташкент, Юнусабадский район, улица Назарбек Тапович", f_hours:"Понедельник–Суббота: 09:00–18:00<br>Воскресенье — выходной",
+    f_rights:"© 2025 MetalDesign.uz — Все права защищены", f_privacy:"Политика конфиденциальности", f_terms:"Условия договора",
+    ticker:["Закладные листы","Промышленные шайбы","Лазерная резка","Премиум ворота","Лазерные решётки","Перила с гладким швом","Оцинковка","Стандарты ГОСТ","Оптовые заказы"]
+  },
+  en: {
+    nav_problem:"Problem", nav_products:"Products", nav_advantages:"Advantages", nav_process:"Process", nav_trust:"Trust", nav_cta:"Free consultation",
+    hero_badge:"Tashkent · Uzbekistan · B2B & B2C Manufacturing",
+    hero_h1_1:"From Foundation", hero_h1_2:"To Gate", hero_h1_3:"Millimeter Precision",
+    hero_sub:"Heavy industrial standard embedded plates, washers, gates, railings and laser cutting for major construction companies and comfortable homes in Uzbekistan — directly from the factory!",
+    btn_consult:"Free consultation",
+    hero_stat1:"Happy clients", hero_stat2:"Laser precision", hero_stat3:"Standard term", unit_hour:"h",
+    prob_label:"Why many projects fail",
+    prob_title:"Do you know what <em>metal mistakes cost?</em>",
+    prob1_h:"Poor welding and thin sheets", prob1_p:"Embedded plates or gates made by low-quality craftsmen bend under load, break over time, or get pulled out of the foundation. This is an invisible but catastrophic defect.",
+    prob2_h:"Constant rust problem", prob2_p:"Street doors, grilles and railings painted with ordinary paint rust in the very first winter, ruining the building facade. And annual repainting is an additional expense.",
+    prob3_h:"Crooked dimensions and time loss", prob3_p:"Parts cut by hand with an angle grinder in the old way don't fit together during installation. Construction time drags on, your money flies away. 0.1mm precision — that's our standard.",
+    prod_label:"Product Catalog",
+    prod_title:"A single solution for metal challenges of <em>any complexity</em>",
+    prod_intro:"Send us your drawing — we'll handle everything else. Separate solutions for B2B and B2C.",
+    cat_b2b:"Industry &<br>Construction (B2B)", cat_b2c:"Architecture &<br>Home (B2C)", cat_laser:"Laser<br>Cutting",
+    p_zakl_h:"Embedded Plates", p_zakl_p:"Metal supports made from steel sheets 4mm to 12mm thick and certified rebar. Sizes: from 100×100 to 400×400 mm and based on your drawing.",
+    p_shayb_h:"Industrial Washers", p_shayb_p:"High-precision stamped wholesale washers meeting DIN and GOST standards, resistant to constant vibration. All sizes from M6 to M72.",
+    p_laser_h:"High-Precision Laser", p_laser_p:"Cutting thick metal sheets with precision up to 0.1mm with an absolutely smooth line. From your DXF/DWG drawing to the finished product.",
+    zakl_table_label:"Embedded Plates — technical table",
+    th_size:"Size (mm)", th_thick:"Thickness", th_arm:"Rebar", th_weight:"Weight (kg)", th_use:"Application",
+    zr1:"Light structures, railings", zr2:"Gates, fence supports", zr3:"Medium-load columns", zr4:"Industrial structures", zr5:"Heavy crane runways", zr6:"Bridges, industrial trusses",
+    tag_popular:"Popular", tag_strong:"Strong", zr_custom:"★ Custom sizes also accepted — send a drawing",
+    p_gate_h:"Premium Gates", p_gate_p:"Modern gates in Loft and Modern styles with computer-calculated weight balance that won't sag or warp over time. Powder-coated in oven — never any rust.",
+    p_grid_h:"Laser Grilles", p_grid_p:"Solid steel grilles that don't turn your home into a prison, don't block sunlight, but are absolutely secure. Any pattern and geometry cut by laser.",
+    p_rail_h:"Smooth-Weld Railings", p_rail_p:"Sturdy stair railings with robotically polished corner and joint welds that won't scratch children's hands. 25-year warranty with polymer coating.",
+    laser_d1_b:"Modern laser cutting", laser_d1_t:"— cutting thick metal sheets under computer control, according to drawing, with precision to a tenth of a millimeter. The cut line is smooth, the edge clean — requires no additional processing.",
+    laser_d2:"We cut facade patterns, complex geometric drawings, technological holes and industrial plates with the same precision.",
+    laser_sub:"What we cut:",
+    laser_li1:"Ready plates for embedded sheets (standard and custom)", laser_li2:"Facade and decorative patterns (architectural projects)", laser_li3:"Housings and covers for industrial machines", laser_li4:"Structural elements of complex geometry", laser_li5:"Metal plates for advertising and signage", laser_li6:"Electrical cabinet and panel housings",
+    ls_precision:"Cutting precision", ls_maxthick:"Max. thickness", ls_maxsize:"Max. sheet size", ls_format:"Accepted format",
+    th_material:"Material", th_maxthick:"Max. thickness", th_quality:"Quality",
+    mat1:"Mild steel (St3)", mat2:"Stainless steel", mat3:"Aluminum", mat4:"Copper / Brass", mat5:"Galvanized",
+    q1:"Clean, smooth", q2:"High quality", q3:"Smooth, shiny", q4:"Precise, clean", q5:"Standard",
+    adv_label:"Why MetalDesign.uz", adv_title:"Our <em>difference</em> from competitors",
+    adv1_h:"Powder coating in 180°C oven", adv1_p:"We don't paint our products with an ordinary brush. Polymer powder is sprayed and baked in a special oven. This means a lifetime guarantee against rust!",
+    adv2_h:"Software engineering (CAD/CAM)", adv2_p:"Each gate or structure is pre-designed on computer, with wind, vibration and weight loads calculated. Probability of error — 0%.",
+    adv3_h:"Direct factory price", adv3_p:"Without middlemen and resellers — since we source raw materials directly from metallurgical plants, we offer the most favorable price on the market.",
+    adv4_h:"Clean and safe installation", adv4_p:"Our professional team will install everything without dust, without damaging walls and tiles, even if your home is renovated. With guarantee.",
+    proc_label:"How we work", proc_title_1:"5 steps —", proc_title_2:"Finished", proc_title_3:"product",
+    step1_h:"Send request", step1_p:"Send a drawing, dimensions or sketch. By phone, Telegram or via the website — whatever is convenient.",
+    step2_h:"Free measurement", step2_p:"Our specialist comes to your site, takes free measurements, selects a design and prepares an estimate.",
+    step3_h:"Agreement", step3_p:"Agreement on price and terms. A contract is concluded. Production begins after advance payment.",
+    step4_h:"Production", step4_p:"Each product per GOST, on certified equipment. QC control — 100% inspection.",
+    step5_h:"Delivery and installation", step5_p:"Clean, safe installation. From 24 hours depending on order size. We deliver throughout Tashkent city and region.",
+    st1:"Major residential complexes", st2:"Happy homeowners", st3:"Wholesale order term", st4:"Passed QC inspection", st5:"Production precision",
+    rev_label:"Our partners' opinions", rev_title:"What they say <em>about us?</em>",
+    rev1_t:"We bought all embedded plates from MetalDesign for the Golden House complex. Each part is precise to the millimeter, the welding is solid. Not a single returned product during the entire construction process.", rev1_n:"Chief Engineer",
+    rev2_t:"The Infinity project required a large volume of embedded plates and washers. MetalDesign delivered within 48 hours. Both price and quality — competitors can't compare.", rev2_n:"Project Manager",
+    rev3_t:"Assalom Sohil needed custom-sized structures. We sent the drawing — ready in two days. Laser cutting precision and weld quality — at the highest level.", rev3_n:"Technical Director",
+    rev4_t:"We placed a large wholesale order for the Assalom Do'stlik facility. Deadlines strictly met, each product passed QC control. We continue our ongoing partnership.", rev4_n:"Construction Director",
+    trust_label:"Quality guarantees", trust_title_1:"You can order", trust_title_2:"With Trust", trust_title_3:"and confidence",
+    trust_p1:"We have worked in the metallurgical and construction industry for years. Our clients are major construction companies, manufacturing enterprises and government customers in Tashkent and the regions.",
+    trust_p2:"Each order is performed under the supervision of one responsible technical specialist. Before shipment, products undergo QC quality control and are sent with a photo report.",
+    guar1:"Full compliance with GOST standards", guar2:"Quality passport on each product", guar3:"Deadline compliance guarantee (in contract)", guar4:"Return or exchange policy", guar5:"Production process photo report", guar6:"Technical consultation — free",
+    cli_complex:"Residential complex", cli_project:"Construction project",
+    cli1_p:"All embedded plates and structures delivered. Permanent partner.", cli2_p:"Large wholesale order — delivered in 48 hours. With quality guarantee.", cli3_p:"Custom-sized structures, laser cutting and welding service.", cli4_p:"Products passed QC control. Deadlines strictly met.",
+    cli_500:"500+ projects", cli_yours:"Your company?", cli_yours_p:"Contact us now — special price for your first order.",
+    faq_label:"Frequently asked questions", faq_title_1:"Answers to your", faq_title_2:"questions",
+    faq1_q:"Are measurement and estimation paid?", faq1_a:"No, our specialist will come to your home or construction site and perform measurement, design selection and estimation absolutely FREE. Without any obligations.",
+    faq2_q:"Is there delivery to the regions?", faq2_a:"Currently, the delivery service is carried out only within Tashkent city and Tashkent region. Customers from other regions can pick up the products themselves.",
+    faq3_q:"Can we order based on our drawings?", faq3_a:"Of course! Our engineers will precisely laser-cut based on any AutoCAD, SolidWorks drawings or simple sketches you provide. Send your drawing via Telegram.",
+    faq4_q:"How long does a standard order take?", faq4_a:"The order term varies depending on the product size — starts from 24 hours. For complex or large projects, the term is agreed in advance and strictly observed.",
+    faq5_q:"How does oven painting differ from galvanizing?", faq5_a:"Powder coating in oven is a polymer coating that provides an aesthetic appearance and 10-15 years of rust protection. Galvanizing is a zinc coating that provides the strongest protection for 25+ years, mainly for industry and outdoor environments.",
+    faq6_q:"How is payment made?", faq6_a:"Payment is accepted in three ways: cash, transfer (bank transfer) and card-to-card transfer. Production begins after advance payment.",
+    cta_title:"Don't gamble with metal, trust the professionals!",
+    cta_sub:"Leave your details. Our engineer will contact you within 15 minutes and prepare a free 3D model and estimate for your project.",
+    ph_name:"Enter your name", ph_company:"Company name (optional)", ph_service:"Service of interest",
+    opt1:"Embedded plates (B2B)", opt2:"Industrial washers (B2B)", opt3:"Premium gates (B2C)", opt4:"Laser grilles (B2C)", opt5:"Railings (B2C)", opt6:"Laser cutting service", opt7:"Several services",
+    btn_submit:"GET FREE CONSULTATION →", cta_or:"or Telegram:",
+    f_desc:"Metalworking, laser cutting and industrial parts manufacturing. Tashkent, Uzbekistan.",
+    f_products:"Products", f_laser:"Laser cutting", f_company:"Company", f_about:"About us", f_quality:"Quality control", f_certs:"Certificates", f_projects:"Projects",
+    f_contact:"Contact", f_address:"Tashkent city, Yunusabad district, Nazarbek Tapovich street", f_hours:"Monday–Saturday: 09:00–18:00<br>Sunday — day off",
+    f_rights:"© 2025 MetalDesign.uz — All rights reserved", f_privacy:"Privacy policy", f_terms:"Terms of service",
+    ticker:["Embedded plates","Industrial washers","Laser cutting","Premium gates","Laser grilles","Smooth-weld railings","Galvanizing","GOST standards","Wholesale orders"]
+  }
+};
+
+// ═══════════════════════════════════════
+// LANGUAGE LOGIC
+// ═══════════════════════════════════════
+let currentLang = 'uz';
+
+function setLang(lang){
+  currentLang = lang;
+  const dict = I18N[lang];
+
+  // Update text content
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined){
+      el.innerHTML = dict[key];
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if(dict[key] !== undefined){
+      el.placeholder = dict[key];
+    }
+  });
+
+  // Update ticker
+  const ticker = document.getElementById('tickerInner');
+  if(ticker && dict.ticker){
+    const items = dict.ticker.concat(dict.ticker); // duplicate for seamless loop
+    ticker.innerHTML = items.map(t => `<span>${t}</span>`).join('');
+  }
+
+  // Update active button states
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang || b.textContent.toLowerCase() === lang);
+  });
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+}
+
+// ═══════════════════════════════════════
+// UI FUNCTIONS
+// ═══════════════════════════════════════
+function openMob(){document.getElementById('mobMenu').classList.add('open');document.body.style.overflow='hidden'}
+function closeMob(){document.getElementById('mobMenu').classList.remove('open');document.body.style.overflow=''}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').style.background = window.scrollY>50?'rgba(6,6,6,0.99)':'rgba(12,12,12,0.97)';
+});
+
+function showCat(name,btn){
+  document.querySelectorAll('.cat-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('cat-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleFaq(el){
+  const item=el.parentElement;
+  const wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen)item.classList.add('open');
+}
+
+// Scroll reveal
+document.querySelectorAll('.reveal').forEach(el=>{
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:.07}).observe(el);
+});
+
+// Stat counter
+function animateCount(el,target,suffix){
+  let start=null; const dur=1600;
+  const isDecimal=target<10&&target%1!==0;
+  const step=ts=>{
+    if(!start)start=ts;
+    const p=Math.min((ts-start)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    const val=target*ease;
+    el.innerHTML=(isDecimal?val.toFixed(1):Math.floor(val))+'<span>'+suffix+'</span>';
+    if(p<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const statsBar=document.querySelector('.stats-bar');
+if(statsBar){
+  new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){
+      const pairs=[{t:15,s:'+'},{t:500,s:'+'}];
+      let idx=0;
+      document.querySelectorAll('[data-target]').forEach(el=>{
+        animateCount(el,pairs[idx]?.t||15,pairs[idx]?.s||'+'); idx++;
+      });
+    }
+  },{threshold:.3}).observe(statsBar);
+}
+
+// Form submit → Telegram
+async function handleSubmit(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const inputs = e.target.querySelectorAll('input, select');
+  const ism=inputs[0].value.trim(), telefon=inputs[1].value.trim();
+  const kompaniya=inputs[2].value.trim()||'—', xizmat=inputs[3].value||'—';
+  const TOKEN='8718008936:AAHq5v8nAMgcmZkdV9LD3tVcwsM4WjeodpI', CHAT_ID='1959711038';
+  const langName={uz:"O'zbek",ru:"Русский",en:"English"}[currentLang];
+  const matn=`🔔 *Yangi so'rov — MetalDesign.uz*\n\n👤 *Ism:* ${ism}\n📞 *Telefon:* ${telefon}\n🏢 *Kompaniya:* ${kompaniya}\n🔧 *Xizmat:* ${xizmat}\n🌐 *Til:* ${langName}\n\n⏰ ${new Date().toLocaleString('ru-RU')}`;
+  const sending={uz:'⏳ Yuborilmoqda...',ru:'⏳ Отправка...',en:'⏳ Sending...'}[currentLang];
+  const success={uz:"✅ So'rovingiz qabul qilindi!",ru:'✅ Заявка принята!',en:'✅ Request received!'}[currentLang];
+  const error={uz:"❌ Xato! Qayta urinib ko'ring",ru:'❌ Ошибка! Попробуйте снова',en:'❌ Error! Try again'}[currentLang];
+  btn.textContent=sending; btn.disabled=true;
+  try{
+    const res=await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:CHAT_ID,text:matn,parse_mode:'Markdown'})});
+    const data=await res.json();
+    if(data.ok){btn.textContent=success;btn.style.background='#1a1a1a';btn.style.color='#4ade80';e.target.reset();}
+    else throw new Error();
+  }catch(err){btn.textContent=error;btn.style.background='#1a1a1a';btn.style.color='#f87171';}
+  btn.disabled=false;
+  setTimeout(()=>{btn.textContent=I18N[currentLang].btn_submit;btn.style.background='';btn.style.color='';},4000);
+}
+
+// Initialize ticker on load
+setLang('uz');
+</script>
+</body>
+</html>
